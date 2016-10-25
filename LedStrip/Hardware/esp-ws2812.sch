@@ -29,7 +29,7 @@ LIBS:atmel
 LIBS:contrib
 LIBS:valves
 LIBS:ESP8266
-LIBS:espbase-cache
+LIBS:esp-ws2812-cache
 EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
@@ -93,9 +93,10 @@ L C C1
 U 1 1 580E10B5
 P 1750 2100
 F 0 "C1" H 1775 2200 50  0000 L CNN
-F 1 "C" H 1775 2000 50  0000 L CNN
+F 1 "0.1uf" H 1775 2000 50  0000 L CNN
 F 2 "Capacitors_SMD:C_0805_HandSoldering" H 1788 1950 50  0001 C CNN
 F 3 "" H 1750 2100 50  0000 C CNN
+F 4 "a  cap of around 0.1 to 10 uf - anything in that range will do" H 1750 2100 60  0001 C CNN "Comments"
 	1    1750 2100
 	1    0    0    -1  
 $EndComp
@@ -104,9 +105,10 @@ L CP C2
 U 1 1 580E1155
 P 2000 2100
 F 0 "C2" H 2025 2200 50  0000 L CNN
-F 1 "CP" H 2025 2000 50  0000 L CNN
+F 1 "2.2uf" H 2025 2000 50  0000 L CNN
 F 2 "SMD_Packages:SMD-1210_Pol" H 2038 1950 50  0001 C CNN
 F 3 "" H 2000 2100 50  0000 C CNN
+F 4 "a Tant cap in the 1-10uf range - anything that fits will do" H 2000 2100 60  0001 C CNN "Notes"
 	1    2000 2100
 	1    0    0    -1  
 $EndComp
@@ -126,9 +128,10 @@ L C C3
 U 1 1 580E12CC
 P 2950 2100
 F 0 "C3" H 2975 2200 50  0000 L CNN
-F 1 "C" H 2975 2000 50  0000 L CNN
+F 1 "0.1uf" H 2975 2000 50  0000 L CNN
 F 2 "Capacitors_SMD:C_0805_HandSoldering" H 2988 1950 50  0001 C CNN
 F 3 "" H 2950 2100 50  0000 C CNN
+F 4 "Any cap in the 0.1-10uf range" H 2950 2100 60  0001 C CNN "Notes"
 	1    2950 2100
 	1    0    0    -1  
 $EndComp
@@ -137,9 +140,10 @@ L CP C4
 U 1 1 580E12D2
 P 3200 2100
 F 0 "C4" H 3225 2200 50  0000 L CNN
-F 1 "CP" H 3225 2000 50  0000 L CNN
+F 1 "2.2uf" H 3225 2000 50  0000 L CNN
 F 2 "SMD_Packages:SMD-1210_Pol" H 3238 1950 50  0001 C CNN
 F 3 "" H 3200 2100 50  0000 C CNN
+F 4 "Any tant cap in the 1-10uf range - what ever fits will do" H 3200 2100 60  0001 C CNN "Notes"
 	1    3200 2100
 	1    0    0    -1  
 $EndComp
