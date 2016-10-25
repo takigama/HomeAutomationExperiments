@@ -15,6 +15,8 @@
 
 void updateState();
 
+
+// our led strip
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(LED_COUNT, PIN, NEO_GRB + NEO_KHZ800);
 int delayval = 500; 
 int showType = 0;
