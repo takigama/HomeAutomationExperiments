@@ -124,6 +124,9 @@ bool lightOnHandler(HomieRange range, String value)
 
 
 
+
+
+
 /*
  * Update the light state (i.e. colorWipe it) based on the
  * settings i've been told
@@ -177,6 +180,9 @@ bool switchLight(HomieRange range, String value) {
 
 
 
+
+
+
 /*
  * handle the brightness factor
  */
@@ -195,6 +201,8 @@ bool changeBrightness(HomieRange range, String value)
   
   return true;
 }
+
+
 
 
 
