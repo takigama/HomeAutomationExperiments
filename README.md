@@ -6,10 +6,10 @@ is you print the board, put its components on, then add an ESP-01 (or s).
 
 ## Messages
 - devices/#DEVICE_ID/switch/switch/set - changes on/off
-- devices/#DEVICE/switch/status - reports status here
-- devices/dev1/brightness/brightness/set - change brightness (0-255)
-- devices/dev1/led/color/set - changes the colour state (R,G,B)
-- devices/dev1/led/color - colour report
+- devices/#DEVICE_ID/switch/status - reports status here
+- devices/#DEVICE_ID/brightness/brightness/set - change brightness (0-255)
+- devices/#DEVICE_ID/led/color/set - changes the colour state (R,G,B)
+- devices/#DEVICE_ID/led/color - colour report
 
 ## Home Assistant config
 looks very roughly like this:
