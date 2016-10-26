@@ -37,4 +37,5 @@ Note, i just started this in late october - its very much a work in progress!
 ## Hardware
 The kicad project is just a little daughter board for an ESP-01 that makes
 it easier to control ws2182's. 5V input with a reg on board and a level
-shifter for the signal line
+shifter for the signal line - see the bom file (html format) for the components
+to get on the board.
