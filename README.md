@@ -13,7 +13,7 @@ is you print the board, put its components on, then add an ESP-01 (or s).
 
 ## Home Assistant config
 looks very roughly like this:
-`
+```
 light:
   - platform: mqtt
     name: "esplight"
@@ -28,7 +28,7 @@ light:
     optimistic: false
     state_topic: "devices/dev1/switch/status"
 
-`
+```
 
 
 ## work in progres
