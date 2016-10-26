@@ -207,7 +207,9 @@ bool changeBrightness(HomieRange range, String value)
 
 
 
-
+/*
+ * The initial setup code
+ */
 void setup() {
 
   // init the serial port - home seems to mess with this at some point
@@ -230,6 +232,9 @@ void setup() {
 
 }
 
+/*
+ * The loop codes
+ */
 void loop() {
   Homie.loop();
 }
