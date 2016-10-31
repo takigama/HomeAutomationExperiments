@@ -10,7 +10,7 @@
 #define FW_VERSION "0.0.1"
 
 #define PIN            2
-#define LED_COUNT      60
+#define LED_COUNT      20
 
 
 void updateState();
@@ -22,20 +22,20 @@ int delayval = 500;
 int showType = 0;
 
 // the "Requested" values for rgb
-int rRed;
-int rGreen;
-int rBlue;
+uint32_t rRed;
+uint32_t rGreen;
+uint32_t rBlue;
 
 // the "brightness" value
-int brightness;
+uint32_t brightness = 255;
 
 // the "total" value (i.e. RGB + brightness)
-int tRed;
-int tGreen;
-int tBlue;
+uint32_t tRed = 255;
+uint32_t tGreen = 255;
+uint32_t tBlue = 255;
 
 // current light state
-bool LightState;
+bool LightState = true;
 
 // number of ws2812's connected
 int numPixels = LED_COUNT;
@@ -61,6 +61,7 @@ void colorWipe(uint32_t c, uint8_t wait)
 {
   for(uint16_t i=0; i<strip.numPixels(); i++) {
     strip.setPixelColor(i, c);
+    strip.setBrightness(brightness);
     strip.show();
     delay(wait);
   }
@@ -136,13 +137,24 @@ void updateState() {
 
   if(LightState && brightness != 0) {
     // do colour calc - gunna be fun
-    tRed = (rRed * 255)/brightness;
-    tGreen = (rGreen * 255)/brightness;
-    tBlue = (rBlue * 255)/brightness;
-    colorWipe(strip.Color(tRed, tGreen, tBlue), 50);
+    //tRed = (rRed * 255)/brightness;
+    //tGreen = (rGreen * 255)/brightness;
+    //tBlue = (rBlue * 255)/brightness;
+    colorWipe(strip.Color(rRed, rGreen, rBlue), 50);
   } else {
     colorWipe(strip.Color(0, 0, 0), 50);
   }
+
+  String val = String(tRed) + "," + String(tGreen) + "," + String(tBlue);
+  ledNode.setProperty( "color").send(val);
+  if(LightState) {
+    lightSwitch.setProperty("status").send("on");
+  } else {
+    lightSwitch.setProperty("status").send("off");
+  }
+  brightnessNode.setProperty("brightness").send(String(brightness));
+
+  
 
 }
 
