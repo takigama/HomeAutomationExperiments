@@ -34,7 +34,7 @@ int cDist = 0;
 int lcDist = 0;
 
 // "parked" distance
-int minDist = 45;
+int minDist = 35;
 
 // current state
 int cState = 0;
@@ -47,7 +47,7 @@ int lcState = 0;
 //int cChangeDist = 200;
 
 // at 45cm's we start changing the led colours to reflect where the person parking is
-int startMin = 150;
+int startMin = 180;
 
 int maxZeroTime = 1000;
 int szt = 0;
