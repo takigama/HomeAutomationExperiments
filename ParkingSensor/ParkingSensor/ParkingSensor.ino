@@ -2,15 +2,16 @@
 #include <NewPing.h>
 
 
+#define DEBUG 0
 // for ping
-#define TRIGGER_PIN  12  // Arduino pin tied to trigger pin on the ultrasonic sensor.
-#define ECHO_PIN     11  // Arduino pin tied to echo pin on the ultrasonic sensor.
+#define TRIGGER_PIN  5  // Arduino pin tied to trigger pin on the ultrasonic sensor.
+#define ECHO_PIN     4  // Arduino pin tied to echo pin on the ultrasonic sensor.
 #define MAX_DISTANCE 200 // Maximum distance we want to ping for (in centimeters). Maximum sensor distance is rated at 400-500cm.
 
 NewPing sonar(TRIGGER_PIN, ECHO_PIN, MAX_DISTANCE); // NewPing setup of pins and maximum distance.
 
 // for ws2812's
-#define PIN            2
+#define PIN            3
 #define LED_COUNT      7
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(LED_COUNT, PIN, NEO_GRB + NEO_KHZ800);
 
@@ -25,21 +26,28 @@ int distance = 0;
 // time for no state change
 int nst_t = 0;
 
-// 200cm's seems fair
-int maxDist = 200;
+// 300cm's seems fair
+int maxDist = 350;
 
 // current dist, last current dist
 int cDist = 0;
 int lcDist = 0;
 
 // "parked" distance
-int minDist = 15;
+int minDist = 45;
+
+// current state
+int cState = 0;
+int lcState = 0;
+// cState = 0 empty if dist > 250 or 0
+// cState = 1 parking if dist < 250 > 1 and delay < 1000
+// cState = 2 parked if dist < 250 > 1 and dely == 1000
 
 // at this dist we start going from green to red
-int cChangeDist = 100;
+//int cChangeDist = 200;
 
 // at 45cm's we start changing the led colours to reflect where the person parking is
-int startMin = 45;
+int startMin = 150;
 
 int maxZeroTime = 1000;
 int szt = 0;
@@ -76,6 +84,7 @@ void setup() {
 
 void loop() {
   int cDiff;
+  int cDiff_a;
 
   cDist = 0;
 
@@ -90,8 +99,10 @@ void loop() {
   // zero szt just in case
   szt = 0;
   
-  cDiff = abs(lcDist - cDist);
+  cDiff_a = lcDist - cDist;
+  cDiff = abs(cDiff_a);
 
+#if DEBUG
   Serial.print("cDist: ");
   Serial.print(cDist, DEC);
   Serial.print(", lcDist: ");
@@ -112,9 +123,10 @@ void loop() {
     Serial.print(" - no state");
   }
   Serial.println("");
+#endif
 
     
-  if(cDiff < 2) {
+  if(cDiff < 3) {
     // no state change, increment rest timer
     if(cDelay < 2000) nst_t++;
     stateChange = false;
@@ -127,7 +139,8 @@ void loop() {
 
 
   if(nst_t < nrest) {
-    cDelay = 150;
+    cDelay = 200;
+    lcState = 1;
 
     // calc a colour value
     if(cDist > startMin) {
@@ -163,19 +176,43 @@ void loop() {
       cFlash = 0;
     }
   } else {
+    
+    if(cDist >= 250 || cDist == 0) {
+      lcState = 0;
+    } else if(cDist < 250) {
+      lcState = 2;
+    }
     cFlash = 0;
     cDelay = 1000;
     if(cOn != 0) changeColour = true;
     cOn = 0;
   }
 
-  if(cDist > 200) 
+  if(nst_t == 100) 
   {
-    if(cOn != 0) {
-      changeColour = true;
-      cOn = 0;
-    }
+    changeColour = true;
+    cOn = 0;
   }
+
+  if(lcState != cState) {
+    switch(lcState) {
+      case 0:
+        Serial.println("empty");
+      break;
+      case 1:
+        Serial.println("parking");
+      break;
+      case 2:
+        Serial.println("parked");
+      break;
+    }
+    cState = lcState;
+  }
+
+  //if(cDiff_a < 0) {
+    //changeColour = true;
+    //cOn = 0;
+  //}
 
   if(changeColour) {
       if(cOn == 0) {
