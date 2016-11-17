@@ -75,14 +75,16 @@ void colorWipe(uint32_t c, uint8_t wait)
 
 
 
-void setup() {
+void setup()
+{
   Serial.begin(115200);
 
   // start the ws2812 code
   strip.begin();
 }
 
-void loop() {
+void loop()
+{
   int cDiff;
   int cDiff_a;
 
