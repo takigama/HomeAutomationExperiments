@@ -132,7 +132,8 @@ bool lightOnHandler(HomieRange range, String value)
  * Update the light state (i.e. colorWipe it) based on the
  * settings i've been told
  */
-void updateState() {
+void updateState()
+{
 
 
   if(LightState && brightness != 0) {
@@ -168,7 +169,8 @@ void updateState() {
 /*
  * Handle the on/off signal
  */
-bool switchLight(HomieRange range, String value) {
+bool switchLight(HomieRange range, String value)
+{
 
   // handle a variety of "on" messaages (on/ON/true/TRUE/1)
   if(value == "on" || value == "ON" || value == "true" || value == "TRUE" || value == "1") {
@@ -222,7 +224,8 @@ bool changeBrightness(HomieRange range, String value)
 /*
  * The initial setup code
  */
-void setup() {
+void setup()
+{
 
   // init the serial port - home seems to mess with this at some point
   // in a way that i cant stop
