@@ -6,8 +6,8 @@
 #include <Homie.h>
 #include <Adafruit_NeoPixel.h>
 
-#define FW_NAME "esp-home-mqtt-ws2812"
-#define FW_VERSION "0.0.1"
+#define FW_NAME "lsc01-esp-home-mqtt-ws2812"
+#define FW_VERSION "0.0.2"
 
 #define PIN            2
 #define LED_COUNT      20

@@ -469,4 +469,6 @@ Wire Wire Line
 	1600 4000 1500 4000
 Wire Wire Line
 	1500 4000 1500 4350
+Text Notes 2600 4000 0    60   ~ 0
+Level shifter circuit here is a copy of the level shifter in the sparkfun bi-directional level shifter\navailable at https://www.sparkfun.com/products/12009
 $EndSCHEMATC
