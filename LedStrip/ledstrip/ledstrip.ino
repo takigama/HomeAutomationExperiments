@@ -1,23 +1,25 @@
+
 /*
  * This code orginally borrowed from http://www.instructables.com/id/ESP8266-controlling-Neopixel-LEDs-using-Arduino-ID/
  * and has since been updated quite alot from its original codebase
  */
 
 #include <Homie.h>
-#include <Adafruit_NeoPixel.h>
+#include <FastLED.h>
 
 #define FW_NAME "lsc01-esp-home-mqtt-ws2812"
 #define FW_VERSION "0.0.2"
 
-#define PIN            2
-#define LED_COUNT      20
+#define NUM_LEDS 60
+#define DATA_PIN 2
 
+CRGB leds[NUM_LEDS];
 
 void updateState();
 
 
 // our led strip
-Adafruit_NeoPixel strip = Adafruit_NeoPixel(LED_COUNT, PIN, NEO_GRB + NEO_KHZ800);
+//Adafruit_NeoPixel strip = Adafruit_NeoPixel(LED_COUNT, PIN, NEO_GRB + NEO_KHZ800);
 int delayval = 500; 
 int showType = 0;
 
@@ -42,8 +44,8 @@ int numPixels = LED_COUNT;
 
 // homie nodes for our setables
 HomieNode ledNode("led", "led");
-HomieNode brightnessNode("brightness", "brightness");
-HomieNode lightSwitch("switch", "switch");
+HomieNode brightnessNode("led", "brightness");
+HomieNode lightSwitch("led", "switch");
 
 
 
@@ -57,13 +59,14 @@ HomieNode lightSwitch("switch", "switch");
 
 // a generic colorwipe function as per the
 // adafruid examples
-void colorWipe(uint32_t c, uint8_t wait)
+void colorWipe(uint_8 r, uint_8 g, uint_8 b)
 {
-  for(uint16_t i=0; i<strip.numPixels(); i++) {
-    strip.setPixelColor(i, c);
-    strip.setBrightness(brightness);
-    strip.show();
-    delay(wait);
+  fill_solid(leds, NUM_LEDS, CRGB(r,g,b));
+  if(brightness!=255) {
+    int fb = 256-brightness;
+    for(int i=0; i<NUM_LEDS; i++) {
+      leds[i].
+    }
   }
 }
 
@@ -141,9 +144,9 @@ void updateState()
     //tRed = (rRed * 255)/brightness;
     //tGreen = (rGreen * 255)/brightness;
     //tBlue = (rBlue * 255)/brightness;
-    colorWipe(strip.Color(rRed, rGreen, rBlue), 50);
+//    colorWipe(strip.Color(rRed, rGreen, rBlue), 50);
   } else {
-    colorWipe(strip.Color(0, 0, 0), 50);
+//    colorWipe(strip.Color(0, 0, 0), 50);
   }
 
   String val = String(tRed) + "," + String(tGreen) + "," + String(tBlue);
@@ -155,7 +158,6 @@ void updateState()
   }
   brightnessNode.setProperty("brightness").send(String(brightness));
 
-  
 
 }
 
@@ -233,7 +235,7 @@ void setup()
   Serial.println(FW_NAME FW_VERSION);
 
   // start the ws2812 code
-  strip.begin();
+  FastLED.addLeds<NEOPIXEL, DATA_PIN>(leds, NUM_LEDS);
 
   Homie_setFirmware(FW_NAME, FW_VERSION);
 
