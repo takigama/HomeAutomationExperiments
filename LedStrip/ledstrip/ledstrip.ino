@@ -7,11 +7,24 @@
 #include <Homie.h>
 #include <FastLED.h>
 
+
+// doing this is kinda annoying to be honest but i cant see an easier way around it
+// as the fastled struct doesnt contain a brightness parameter and we need that
+struct RGBB {
+  uint8_t r;
+  uint8_t g;
+  uint8_t b;
+  uint8_t br;
+};
+
+
 #define FW_NAME "lsc01-esp-home-mqtt-ws2812"
 #define FW_VERSION "0.0.2"
 
-#define NUM_LEDS 60
+#define NUM_LEDS 144
 #define DATA_PIN 2
+
+RGBB myleds[NUM_LEDS];
 
 CRGB leds[NUM_LEDS];
 
@@ -24,87 +37,68 @@ int delayval = 500;
 int showType = 0;
 
 // the "Requested" values for rgb
-uint32_t rRedLeft;
-uint32_t rGreenLeft;
-uint32_t rBlueLeft;
-uint32_t rRedRight;
-uint32_t rGreenRight;
-uint32_t rBlueRight;
+uint32_t rRed;
+uint32_t rGreen;
+uint32_t rBlue;
 
 // the "brightness" value
-uint32_t brightnessLeft = 255;
-uint32_t brightnessRight = 255;
+uint32_t brightness = 255;
 
 // current light state
-bool LightStateLeft = true;
-bool LightStateRight = true;
+bool LightState = true;
 
 // number of ws2812's connected
 int numPixels = NUM_LEDS;
-int halfPixels = numPixels/2;
 
 // homie nodes for our setables
 HomieNode ledNode("led", "color");
 HomieNode brightnessNode("led", "brightness");
 HomieNode lightSwitch("led", "switch");
 
-HomieNode ledNodeLeft("left", "color");
-HomieNode brightnessNodeLeft("left", "brightness");
-HomieNode lightSwitchLeft("left", "switch");
-
-HomieNode ledNodeRight("right", "color");
-HomieNode brightnessNodeRight("right", "brightness");
-HomieNode lightSwitchRight("right", "switch");
 
 
 
 
 
-
-
-
-
-
-
-int myColorWipeLeft(uint8_t r, uint8_t g, uint8_t b)
+String getValue(String data, char separator, int index)
 {
+  int found = 0;
+  int strIndex[] = {0, -1};
+  int maxIndex = data.length()-1;
 
-  if(brightnessLeft!=255) {
-    int fb = 255-brightnessLeft;
-    for(int i=0; i<halfPixels; i++) {
-      leds[i].r = r;
-      leds[i].g = g;
-      leds[i].b = b;
-      leds[i].fadeLightBy(fb);
+  for(int i=0; i<=maxIndex && found<=index; i++){
+    if(data.charAt(i)==separator || i==maxIndex){
+        found++;
+        strIndex[0] = strIndex[1]+1;
+        strIndex[1] = (i == maxIndex) ? i+1 : i;
     }
-  } else {
-    for(int i=0; i<halfPixels; i++) {
-      leds[i].r = r;
-      leds[i].g = g;
-      leds[i].b = b;
-    }
+  }
+
+  return found>index ? data.substring(strIndex[0], strIndex[1]) : "";
+}
+
+
+
+
+
+
+
+
+int myColorWipe(uint8_t s, uint8_t e, uint8_t r, uint8_t g, uint8_t b)
+{
+  for(int i=s; i<e; i++) {
+    myleds[i].r = r;
+    myleds[i].g = g;
+    myleds[i].b = b;
   }
 }
 
-int myColorWipeRight(uint8_t r, uint8_t g, uint8_t b)
+int myBrightWipe(uint8_t s, uint8_t e, uint8_t br)
 {
-  if(brightnessRight!=255) {
-    int fb = 255-brightnessRight;
-    for(int i=halfPixels; i<numPixels; i++) {
-      leds[i].r = r;
-      leds[i].g = g;
-      leds[i].b = b;
-      leds[i].fadeLightBy(fb);
-    }
-  } else {
-    for(int i=halfPixels; i<numPixels; i++) {
-      leds[i].r = r;
-      leds[i].g = g;
-      leds[i].b = b;
-    }
+  for(int i=s; i<e; i++) {
+    myleds[i].br = br;
   }
 }
-
 
 
 
@@ -114,56 +108,20 @@ int myColorWipeRight(uint8_t r, uint8_t g, uint8_t b)
  * Update the light state (i.e. colorWipe it) based on the
  * settings i've been told
  */
-void updateStateLeft()
+void updateState()
 {
-
-  // handle left
-
-  if(LightStateLeft && brightnessLeft != 0) {
-    myColorWipeLeft(rRedLeft, rGreenLeft, rBlueLeft);
-  } else {
-    myColorWipeLeft(0, 0, 0);
+  for(int i=0; i<NUM_LEDS; i++) {
+    leds[i].r = myleds[i].r;
+    leds[i].g = myleds[i].g;
+    leds[i].b = myleds[i].b;
+    if(myleds[i].br != 255) {
+      leds[i].fadeLightBy(255-myleds[i].br);
+    }
   }
-
-  String val = String(rRedLeft) + "," + String(rGreenLeft) + "," + String(rBlueLeft);
-  ledNodeLeft.setProperty( "color").send(val);
-  if(LightStateLeft) {
-    lightSwitchLeft.setProperty("status").send("on");
-  } else {
-    lightSwitchLeft.setProperty("status").send("off");
-  }
-  brightnessNodeLeft.setProperty("brightness").send(String(brightnessLeft));
 
   FastLED.show();
 }
 
-void updateStateRight()
-{
-
-  // handle left
-
-  if(LightStateRight && brightnessRight != 0) {
-    myColorWipeRight(rRedRight, rGreenRight, rBlueRight);
-  } else {
-    myColorWipeRight(0, 0, 0);
-  }
-
-  String val = String(rRedRight) + "," + String(rGreenRight) + "," + String(rBlueRight);
-  ledNodeRight.setProperty( "color").send(val);
-  if(LightStateRight) {
-    lightSwitchRight.setProperty("status").send("on");
-  } else {
-    lightSwitchRight.setProperty("status").send("off");
-  }
-  brightnessNodeRight.setProperty("brightness").send(String(brightnessRight));
-
-  FastLED.show();
-}
-
-void updateState() {
-  updateStateRight();
-  updateStateLeft();
-}
 
 
 
@@ -178,50 +136,22 @@ void updateState() {
 /*
  * when we get sent a colour change message, this gets called
  * we should never really see "off" here though
+ * we now expect a format of x,y,r,g.b
+ * where x is the start pixel (0) y is the end pixel (numpixels)
  */
-bool lightColorHandlerLeft(HomieRange range, String value, bool update = true)
-{
-  // TODO: we really should check that value is something like [0-255],[0-255],[0-255]
-  rRedLeft = value.substring(0,value.indexOf(',')).toInt();
-  rGreenLeft = value.substring(value.indexOf(',')+1,value.lastIndexOf(',')).toInt();
-  rBlueLeft = value.substring(value.lastIndexOf(',')+1).toInt();
-  //ledNodeLeft.setProperty( "color").send(value);
- 
-  if(update) updateState();
-  
-  return true;
-}
-
-bool lightColorHandlerRight(HomieRange range, String value, bool update = true)
-{
-  // TODO: we really should check that value is something like [0-255],[0-255],[0-255]
-  rRedRight = value.substring(0,value.indexOf(',')).toInt();
-  rGreenRight = value.substring(value.indexOf(',')+1,value.lastIndexOf(',')).toInt();
-  rBlueRight = value.substring(value.lastIndexOf(',')+1).toInt();
-  //ledNodeRight.setProperty( "color").send(value);
- 
-  if(update) updateState();
-  
-  return true;
-}
-
-bool lightColorHandlerLeftM(HomieRange range, String value)
-{
-  return lightColorHandlerLeft(range, value, true);
-
-}
-
-bool lightColorHandlerRightM(HomieRange range, String value)
-{
-  return lightColorHandlerRight(range, value, true);
-
-}
-
 bool lightColorHandler(HomieRange range, String value)
 {
   // TODO: we really should check that value is something like [0-255],[0-255],[0-255]
-  lightColorHandlerLeft(range, value, false);
-  lightColorHandlerRight(range, value, false);
+  uint8_t sVal, eVal;
+  
+  sVal = getValue(value, ',', 0).toInt();
+  eVal = getValue(value, ',', 1).toInt();
+  rRed = getValue(value, ',', 2).toInt();
+  rGreen = getValue(value, ',', 3).toInt();
+  rBlue = getValue(value, ',', 4).toInt();
+  //ledNode.setProperty( "color").send(value);
+
+  myColorWipe(sVal, eVal, rRed, rGreen, rBlue);
  
   updateState();
   
@@ -232,70 +162,40 @@ bool lightColorHandler(HomieRange range, String value)
 
 
 
-
 /*
  * Handle the on/off signal
+ * now takes x,y,state
  */
-
-
-bool switchLightLeft(HomieRange range, String value, bool update=true)
-{
-
-  // handle a variety of "on" messaages (on/ON/true/TRUE/1)
-  if(value == "on" || value == "ON" || value == "true" || value == "TRUE" || value == "1") {
-    // turn the light off
-    if(brightnessLeft == 0) brightnessLeft = 128;
-    LightStateLeft = true;
-  } else {
-    // turn the light on
-    LightStateLeft = false;    
-  }
-  if(update) updateStateLeft();
-
-  // tell the mqtt server about it
-  lightSwitchLeft.setProperty("status").send(value);
-
-  return true;
-}
-
-bool switchLightRight(HomieRange range, String value, bool update=true)
-{
-
-  // handle a variety of "on" messaages (on/ON/true/TRUE/1)
-  if(value == "on" || value == "ON" || value == "true" || value == "TRUE" || value == "1") {
-    // turn the light off
-    if(brightnessRight == 0) brightnessRight = 128;
-    LightStateRight = true;
-  } else {
-    // turn the light on
-    LightStateRight = false;    
-  }
-  if(update) updateStateRight();
-
-  // tell the mqtt server about it
-  lightSwitchRight.setProperty("status").send(value);
-
-  return true;
-}
-
-bool switchLightLeftM(HomieRange range, String value)
-{
-  return switchLightLeft(range, value, true);
-}
-
-bool switchLightRightM(HomieRange range, String value)
-{
-  return switchLightRight(range, value, true);
-}
 
 
 bool switchLight(HomieRange range, String value)
 {
-  switchLightLeft(range, value, false); 
-  switchLightRight(range, value, false); 
+  uint8_t sVal, eVal;
+  
+  sVal = getValue(value, ',', 0).toInt();
+  eVal = getValue(value, ',', 1).toInt();
+  String sState = getValue(value, ',', 2);
+
+
+  // handle a variety of "on" messaages (on/ON/true/TRUE/1)
+  if(sState == "on" || value == "ON" || value == "true" || value == "TRUE" || value == "1") {
+    // turn the light off
+    myColorWipe(sVal, eVal, 0, 0, 0);
+    myBrightWipe(sVal, eVal, 255);
+  } else {
+    // turn the light on - we use the last spec'd color
+    myColorWipe(sVal, eVal, rRed, rGreen, rBlue);
+    myBrightWipe(sVal, eVal, brightness);
+  }
+  
+  updateState();
+
+  // tell the mqtt server about it
+  lightSwitch.setProperty("status").send(sState);
 
   return true;
 }
+
 
 
 
@@ -307,56 +207,30 @@ bool switchLight(HomieRange range, String value)
  * handle the brightness factor
  */
  
-bool changeBrightnessLeft(HomieRange range, String value, bool update=true)
-{
-  brightnessLeft = value.toInt();
-  
-  // bounds check
-  if(brightnessLeft > 255) brightnessLeft = 255;
-  if(brightnessLeft < 0) brightnessLeft = 0;
-  
-  if(update) updateStateLeft();
-
-  // tell mqtt about it all
-  brightnessNodeLeft.setProperty("brightness").send(value);
-  
-  return true;
-}
-
-// right
-bool changeBrightnessRight(HomieRange range, String value, bool update=true)
-{
-  brightnessRight = value.toInt();
-  
-  // bounds check
-  if(brightnessRight > 255) brightnessRight = 255;
-  if(brightnessRight < 0) brightnessRight = 0;
-  
-  if(update) updateStateRight();
-
-  // tell mqtt about it all
-  brightnessNodeRight.setProperty("brightness").send(value);
-  
-  return true;
-}
-
-bool changeBrightnessRightM(HomieRange range, String value) {
-  return changeBrightnessRight(range, value, true);
-}
-
-bool changeBrightnessLeftM(HomieRange range, String value) {
-  return changeBrightnessLeft(range, value, true);
-}
-
 bool changeBrightness(HomieRange range, String value)
 {
-  changeBrightnessLeft(range, value, false);
-  changeBrightnessRight(range, value, false);
 
+  uint8_t sVal, eVal;
+  
+  sVal = getValue(value, ',', 0).toInt();
+  eVal = getValue(value, ',', 1).toInt();
+
+  brightness = getValue(value, ',', 2).toInt();
+  
+  // bounds check
+  if(brightness > 255) brightness = 255;
+  if(brightness < 0) brightness = 0;
+
+  myBrightWipe(sVal, eVal, brightness);
+  
   updateState();
 
+  // tell mqtt about it all
+  brightnessNode.setProperty("brightness").send(String(brightness));
+  
   return true;
 }
+
 
 
 
@@ -383,14 +257,6 @@ void setup()
   ledNode.advertise("color").settable(lightColorHandler);
   lightSwitch.advertise("switch").settable(switchLight);
   brightnessNode.advertise("brightness").settable(changeBrightness);
-
-  ledNodeLeft.advertise("color").settable(lightColorHandlerLeftM);
-  lightSwitchLeft.advertise("switch").settable(switchLightLeftM);
-  brightnessNodeLeft.advertise("brightness").settable(changeBrightnessLeftM);
-  
-  ledNodeRight.advertise("color").settable(lightColorHandlerRightM);
-  lightSwitchRight.advertise("switch").settable(switchLightRightM);
-  brightnessNodeRight.advertise("brightness").settable(changeBrightnessRightM);
 
   // get homie moving
   Homie.setup();
