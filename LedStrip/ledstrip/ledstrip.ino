@@ -19,7 +19,7 @@ struct RGBB {
 
 
 #define FW_NAME "lsc01-esp-home-mqtt-ws2812"
-#define FW_VERSION "0.0.2"
+#define FW_VERSION "0.0.8"
 
 #define NUM_LEDS 144
 #define DATA_PIN 2
@@ -51,9 +51,24 @@ bool LightState = true;
 int numPixels = NUM_LEDS;
 
 // homie nodes for our setables
-HomieNode ledNode("led", "color");
-HomieNode brightnessNode("led", "brightness");
-HomieNode lightSwitch("led", "switch");
+HomieNode ledNode("color", "color");
+HomieNode brightnessNode("brightness", "brightness");
+HomieNode lightSwitch("switch", "switch");
+
+
+
+
+
+int countChar(String data, char chr)
+{
+  int nc = 0;
+  int clen = data.length();
+  for(int i=0; i<clen; i++) {
+    if(data[i] == chr) nc++;
+  }
+
+  return nc;
+}
 
 
 
@@ -141,19 +156,42 @@ void updateState()
  */
 bool lightColorHandler(HomieRange range, String value)
 {
+  ledNode.setProperty("ack").send("ack");
+  ledNode.setProperty("ack").send(value);
+
   // TODO: we really should check that value is something like [0-255],[0-255],[0-255]
   uint8_t sVal, eVal;
+  uint8_t nlc = countChar(value, ',');
   
-  sVal = getValue(value, ',', 0).toInt();
-  eVal = getValue(value, ',', 1).toInt();
-  rRed = getValue(value, ',', 2).toInt();
-  rGreen = getValue(value, ',', 3).toInt();
-  rBlue = getValue(value, ',', 4).toInt();
-  //ledNode.setProperty( "color").send(value);
+  if(nlc == 2) {
+    sVal = 0;
+    eVal = NUM_LEDS;
+    rRed = getValue(value, ',', 0).toInt();
+    rGreen = getValue(value, ',', 1).toInt();
+    rBlue = getValue(value, ',', 2).toInt();
+    //ledNode.setProperty( "color").send(value);
+  } else if(nlc == 4) {
+    sVal = getValue(value, ',', 0).toInt();
+    eVal = getValue(value, ',', 1).toInt();
+    rRed = getValue(value, ',', 2).toInt();
+    rGreen = getValue(value, ',', 3).toInt();
+    rBlue = getValue(value, ',', 4).toInt();    
+  } else return true;
 
   myColorWipe(sVal, eVal, rRed, rGreen, rBlue);
  
   updateState();
+
+
+  ledNode.setProperty("ack").send("ack2");
+  ledNode.setProperty("ack").send(String(nlc));
+  ledNode.setProperty("ack").send(String(sVal));
+  ledNode.setProperty("ack").send(String(eVal));
+  ledNode.setProperty("ack").send(String(rRed));
+  ledNode.setProperty("ack").send(String(rGreen));
+  ledNode.setProperty("ack").send(String(rBlue));
+  ledNode.setProperty("ack").send("ackend");
+  ledNode.setProperty("ack").send(value);
   
   return true;
 }
@@ -170,27 +208,41 @@ bool lightColorHandler(HomieRange range, String value)
 
 bool switchLight(HomieRange range, String value)
 {
+  ledNode.setProperty("ack").send("ack");
+  ledNode.setProperty("ack").send(value);
+
   uint8_t sVal, eVal;
-  
-  sVal = getValue(value, ',', 0).toInt();
-  eVal = getValue(value, ',', 1).toInt();
-  String sState = getValue(value, ',', 2);
+  uint8_t nlc = countChar(value, ',');
+  String sState;
+
+  if(nlc == 2) {
+    sVal = getValue(value, ',', 0).toInt();
+    eVal = getValue(value, ',', 1).toInt();
+    sState = getValue(value, ',', 2);
+  } else {
+    sVal = 0;
+    eVal = NUM_LEDS;
+    sState = value;
+  }
 
 
   // handle a variety of "on" messaages (on/ON/true/TRUE/1)
   if(sState == "on" || value == "ON" || value == "true" || value == "TRUE" || value == "1") {
     // turn the light off
-    myColorWipe(sVal, eVal, 0, 0, 0);
+    myColorWipe(sVal, eVal, rRed, rGreen, rBlue);
     myBrightWipe(sVal, eVal, 255);
   } else {
     // turn the light on - we use the last spec'd color
-    myColorWipe(sVal, eVal, rRed, rGreen, rBlue);
     myBrightWipe(sVal, eVal, brightness);
+    myColorWipe(sVal, eVal, 0, 0, 0);
   }
   
   updateState();
 
   // tell the mqtt server about it
+  ledNode.setProperty("ack").send("ack2");
+  ledNode.setProperty("ack").send(value);
+
   lightSwitch.setProperty("status").send(sState);
 
   return true;
@@ -209,13 +261,24 @@ bool switchLight(HomieRange range, String value)
  
 bool changeBrightness(HomieRange range, String value)
 {
+  ledNode.setProperty("ack").send("ack");
+  ledNode.setProperty("ack").send(value);
+
 
   uint8_t sVal, eVal;
-  
-  sVal = getValue(value, ',', 0).toInt();
-  eVal = getValue(value, ',', 1).toInt();
+  uint8_t nlc = countChar(value, ',');
 
-  brightness = getValue(value, ',', 2).toInt();
+
+  if(nlc == 2) {
+    sVal = getValue(value, ',', 0).toInt();
+    eVal = getValue(value, ',', 1).toInt();
+  
+    brightness = getValue(value, ',', 2).toInt();
+  } else {
+    sVal = 0;
+    eVal = NUM_LEDS;
+    brightness = value.toInt();
+  }
   
   // bounds check
   if(brightness > 255) brightness = 255;
@@ -226,6 +289,9 @@ bool changeBrightness(HomieRange range, String value)
   updateState();
 
   // tell mqtt about it all
+  ledNode.setProperty("ack").send("ack2");
+  ledNode.setProperty("ack").send(value);
+
   brightnessNode.setProperty("brightness").send(String(brightness));
   
   return true;

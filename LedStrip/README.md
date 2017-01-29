@@ -10,8 +10,11 @@ is you print the board, put its components on, then add an ESP-01 (or s).
 - devices/#DEVICE_ID/switch/switch/set - changes on/off
 - devices/#DEVICE_ID/switch/status - reports status here
 - devices/#DEVICE_ID/brightness/brightness/set - change brightness (0-255)
-- devices/#DEVICE_ID/led/color/set - changes the colour state (R,G,B)
-- devices/#DEVICE_ID/led/color - colour report
+- devices/#DEVICE_ID/color/color/set - changes the colour state (R,G,B)
+- devices/#DEVICE_ID/color/color - colour report
+
+Can be used with ranges, i.e. sending 0,20,on to switch will only turn on
+leds 0 to 20 - isnt required
 
 ## Home Assistant config
 looks very roughly like this:
@@ -35,6 +38,20 @@ light:
 
 ## work in progres
 Note, i just started this in late october - its very much a work in progress!
+
+## TODO's
+
+### DONE
+1) Moved to fastled lib (not really liking it much) - DONE
+2) change messages to allow for sub-ranges - DONE
+
+### Not Done
+3) add some fixed effects (fire, candle, pointer, etc)
+4) make number of leds dynamic (and saved in eeprom)
+
+
+
+
 
 ## Hardware
 The kicad project is just a little daughter board for an ESP-01 that makes
