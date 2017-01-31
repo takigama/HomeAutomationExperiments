@@ -17,11 +17,45 @@ struct RGBB {
   uint8_t br;
 };
 
+enum specialState {
+  nothing = 0,
+  fire = 1,
+  candle = 2,
+  pointerforward = 3,
+  pointerbackward = 4
+};
+
+
+
+
+
+
+// Special state variables
+// first pointer mode
+#define POINT_DELAY 40
+int cPoint = 0;
+int lastUp = 0;
+
+// fire mode
+CRGBPalette16 gPal;
+specialState specState = nothing;
+// TODO: make fire brightness come from generic brightness
+#define BRIGHTNESS  200
+#define FIRE_DELAY 15
+#define COOLING  55
+// SPARKING: What chance (out of 255) is there that a new spark will be lit?
+// Higher chance = more roaring fire.  Lower chance = more flickery fire.
+// Default 120, suggested range 50-200.
+#define SPARKING 120
+
+
+
+
 
 #define FW_NAME "lsc01-esp-home-mqtt-ws2812"
-#define FW_VERSION "0.0.8"
+#define FW_VERSION "0.0.9"
 
-#define NUM_LEDS 144
+#define NUM_LEDS 60
 #define DATA_PIN 2
 
 RGBB myleds[NUM_LEDS];
@@ -156,8 +190,8 @@ void updateState()
  */
 bool lightColorHandler(HomieRange range, String value)
 {
-  ledNode.setProperty("ack").send("ack");
-  ledNode.setProperty("ack").send(value);
+//  ledNode.setProperty("ack").send("ack");
+//  ledNode.setProperty("ack").send(value);
 
   // TODO: we really should check that value is something like [0-255],[0-255],[0-255]
   uint8_t sVal, eVal;
@@ -183,14 +217,14 @@ bool lightColorHandler(HomieRange range, String value)
   updateState();
 
 
-  ledNode.setProperty("ack").send("ack2");
-  ledNode.setProperty("ack").send(String(nlc));
-  ledNode.setProperty("ack").send(String(sVal));
-  ledNode.setProperty("ack").send(String(eVal));
-  ledNode.setProperty("ack").send(String(rRed));
-  ledNode.setProperty("ack").send(String(rGreen));
-  ledNode.setProperty("ack").send(String(rBlue));
-  ledNode.setProperty("ack").send("ackend");
+//  ledNode.setProperty("ack").send("ack2");
+//  ledNode.setProperty("ack").send(String(nlc));
+//  ledNode.setProperty("ack").send(String(sVal));
+//  ledNode.setProperty("ack").send(String(eVal));
+//  ledNode.setProperty("ack").send(String(rRed));
+//  ledNode.setProperty("ack").send(String(rGreen));
+//  ledNode.setProperty("ack").send(String(rBlue));
+//  ledNode.setProperty("ack").send("ackend");
   ledNode.setProperty("ack").send(value);
   
   return true;
@@ -208,8 +242,8 @@ bool lightColorHandler(HomieRange range, String value)
 
 bool switchLight(HomieRange range, String value)
 {
-  ledNode.setProperty("ack").send("ack");
-  ledNode.setProperty("ack").send(value);
+//  ledNode.setProperty("ack").send("ack");
+//  ledNode.setProperty("ack").send(value);
 
   uint8_t sVal, eVal;
   uint8_t nlc = countChar(value, ',');
@@ -225,14 +259,29 @@ bool switchLight(HomieRange range, String value)
     sState = value;
   }
 
+  specState = nothing;
 
   // handle a variety of "on" messaages (on/ON/true/TRUE/1)
   if(sState == "on" || value == "ON" || value == "true" || value == "TRUE" || value == "1") {
     // turn the light off
     myColorWipe(sVal, eVal, rRed, rGreen, rBlue);
     myBrightWipe(sVal, eVal, 255);
+  } else if(sState == "fire") {
+    gPal = HeatColors_p;
+    specState = fire;
+    myBrightWipe(0, NUM_LEDS, 255);
+    myColorWipe(0, NUM_LEDS, 255, 64, 64);
+  } else if(sState == "candle") {
+  } else if(sState == "pointforward") {
+    specState = pointerforward;
+    myBrightWipe(0, NUM_LEDS, 255);
+    myColorWipe(0, NUM_LEDS, 255, 255, 255);
+  } else if(sState == "pointbackward") {
+    specState = pointerbackward;
+    myBrightWipe(0, NUM_LEDS, 255);
+    myColorWipe(0, NUM_LEDS, 255, 255, 255);
   } else {
-    // turn the light on - we use the last spec'd color
+    // turn the light off - we use the last spec'd color
     myBrightWipe(sVal, eVal, brightness);
     myColorWipe(sVal, eVal, 0, 0, 0);
   }
@@ -240,10 +289,10 @@ bool switchLight(HomieRange range, String value)
   updateState();
 
   // tell the mqtt server about it
-  ledNode.setProperty("ack").send("ack2");
-  ledNode.setProperty("ack").send(value);
+//  ledNode.setProperty("ack").send("ack2");
+//  ledNode.setProperty("ack").send(value);
 
-  lightSwitch.setProperty("status").send(sState);
+  lightSwitch.setProperty("status").send(value);
 
   return true;
 }
@@ -261,8 +310,8 @@ bool switchLight(HomieRange range, String value)
  
 bool changeBrightness(HomieRange range, String value)
 {
-  ledNode.setProperty("ack").send("ack");
-  ledNode.setProperty("ack").send(value);
+//  ledNode.setProperty("ack").send("ack");
+//  ledNode.setProperty("ack").send(value);
 
 
   uint8_t sVal, eVal;
@@ -289,12 +338,88 @@ bool changeBrightness(HomieRange range, String value)
   updateState();
 
   // tell mqtt about it all
-  ledNode.setProperty("ack").send("ack2");
-  ledNode.setProperty("ack").send(value);
+//  ledNode.setProperty("ack").send("ack2");
+//  ledNode.setProperty("ack").send(value);
 
-  brightnessNode.setProperty("brightness").send(String(brightness));
+  brightnessNode.setProperty("brightness").send(value);
   
   return true;
+}
+
+
+
+
+
+
+// the code below comes from FASTled - pretty much unedited
+
+
+void Fire2012WithPalette()
+{
+// Array of temperature readings at each simulation cell
+  static byte heat[NUM_LEDS];
+
+  // Step 1.  Cool down every cell a little
+    for( int i = 0; i < NUM_LEDS; i++) {
+      heat[i] = qsub8( heat[i],  random8(0, ((COOLING * 10) / NUM_LEDS) + 2));
+    }
+  
+    // Step 2.  Heat from each cell drifts 'up' and diffuses a little
+    for( int k= NUM_LEDS - 1; k >= 2; k--) {
+      heat[k] = (heat[k - 1] + heat[k - 2] + heat[k - 2] ) / 3;
+    }
+    
+    // Step 3.  Randomly ignite new 'sparks' of heat near the bottom
+    if( random8() < SPARKING ) {
+      int y = random8(7);
+      heat[y] = qadd8( heat[y], random8(160,255) );
+    }
+
+    // Step 4.  Map from heat cells to LED colors
+    for( int j = 0; j < NUM_LEDS; j++) {
+      // Scale the heat value from 0-255 down to 0-240
+      // for best results with color palettes.
+      byte colorindex = scale8( heat[j], 240);
+      CRGB color = ColorFromPalette( gPal, colorindex);
+      myleds[j].r = color.r;
+      myleds[j].g = color.g;
+      myleds[j].b = color.b;
+      myleds[j].br = 255;
+    }
+}
+
+
+
+void makeState()
+{
+  switch(specState) {
+    case fire:
+      if((millis() - lastUp) > FIRE_DELAY) {
+        Fire2012WithPalette();
+        lastUp = millis();
+      }
+      break;
+    case pointerforward:
+      if((millis() - lastUp) > POINT_DELAY) {
+        myleds[cPoint].br = 255;
+        cPoint++;
+        if(cPoint > (NUM_LEDS-1)) cPoint = 0;
+        myleds[cPoint].br = 2;
+        lastUp = millis();
+      }
+      break;
+    case pointerbackward:
+      if((millis() - lastUp) > POINT_DELAY) {
+        myleds[cPoint].br = 255;
+        cPoint--;
+        if(cPoint < 0) cPoint = NUM_LEDS-1;
+        myleds[cPoint].br = 2;
+        lastUp = millis();
+      }
+      break;
+  }
+
+  updateState();
 }
 
 
@@ -327,6 +452,12 @@ void setup()
   // get homie moving
   Homie.setup();
 
+  myColorWipe(0, 60, 255, 255, 255);
+  myBrightWipe(0, 60, 255);
+  specState = fire;
+  gPal = HeatColors_p;
+  updateState();
+
 }
 
 /*
@@ -334,4 +465,8 @@ void setup()
  */
 void loop() {
   Homie.loop();
+
+  if(specState != nothing) {
+    makeState();
+  }
 }
