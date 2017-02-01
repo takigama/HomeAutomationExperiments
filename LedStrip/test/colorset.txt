@@ -1,0 +1,91 @@
+#!/bin/bash
+
+DELAY=0.5
+
+sleep $DELAY
+mosquitto_pub -t "devices/lsc01/color/color/set" -m "255,255,255" $@
+mosquitto_pub -t "devices/lsc01/brightness/brightness/set" -m "255" $@
+mosquitto_pub -t "devices/lsc01/switch/switch/set" -m "on" $@
+
+sleep $DELAY
+mosquitto_pub -t "devices/lsc01/color/color/set" -m "255,0,0" $@
+
+sleep $DELAY
+mosquitto_pub -t "devices/lsc01/color/color/set" -m "255,0,0" $@
+
+sleep $DELAY
+mosquitto_pub -t "devices/lsc01/color/color/set" -m "0,255,0" $@
+
+sleep $DELAY
+mosquitto_pub -t "devices/lsc01/color/color/set" -m "0,0,255" $@
+
+sleep $DELAY
+mosquitto_pub -t "devices/lsc01/color/color/set" -m "255,255,255" $@
+mosquitto_pub -t "devices/lsc01/brightness/brightness/set" -m "255" $@
+mosquitto_pub -t "devices/lsc01/switch/switch/set" -m "on" $@
+
+sleep $DELAY
+mosquitto_pub -t "devices/lsc01/brightness/brightness/set" -m "0,20,8" $@
+mosquitto_pub -t "devices/lsc01/brightness/brightness/set" -m "20,40,32" $@
+mosquitto_pub -t "devices/lsc01/brightness/brightness/set" -m "40,60,128" $@
+
+sleep $DELAY
+mosquitto_pub -t "devices/lsc01/color/color/set" -m "31,40,255,255,0" $@
+
+sleep $DELAY
+mosquitto_pub -t "devices/lsc01/color/color/set" -m "0,5,0,0,255" $@
+sleep $DELAY
+mosquitto_pub -t "devices/lsc01/color/color/set" -m "5,10,0,0,255" $@
+sleep $DELAY
+mosquitto_pub -t "devices/lsc01/color/color/set" -m "10,15,0,0,255" $@
+sleep $DELAY
+mosquitto_pub -t "devices/lsc01/color/color/set" -m "15,20,0,0,255" $@
+sleep $DELAY
+mosquitto_pub -t "devices/lsc01/color/color/set" -m "20,25,0,0,255" $@
+sleep $DELAY
+mosquitto_pub -t "devices/lsc01/color/color/set" -m "25,30,0,0,255" $@
+
+sleep $DELAY
+mosquitto_pub -t "devices/lsc01/brightness/brightness/set" -m "2" $@
+mosquitto_pub -t "devices/lsc01/brightness/brightness/set" -m "11,22,64" $@
+mosquitto_pub -t "devices/lsc01/color/color/set" -m "11,12,255,255,255" $@
+mosquitto_pub -t "devices/lsc01/color/color/set" -m "12,13,0,255,255" $@
+mosquitto_pub -t "devices/lsc01/color/color/set" -m "13,14,255,0,255" $@
+mosquitto_pub -t "devices/lsc01/color/color/set" -m "14,15,255,255,0" $@
+mosquitto_pub -t "devices/lsc01/color/color/set" -m "15,16,0,0,255" $@
+mosquitto_pub -t "devices/lsc01/color/color/set" -m "16,17,255,0,0" $@
+mosquitto_pub -t "devices/lsc01/color/color/set" -m "17,18,0,255,0" $@
+mosquitto_pub -t "devices/lsc01/color/color/set" -m "18,19,128,0,255" $@
+mosquitto_pub -t "devices/lsc01/color/color/set" -m "19,20,0,128,255" $@
+mosquitto_pub -t "devices/lsc01/color/color/set" -m "20,21,255,0,128" $@
+
+sleep $DELAY
+sleep $DELAY
+sleep $DELAY
+sleep $DELAY
+mosquitto_pub -t "devices/lsc01/color/color/set" -m "20,40,255,255,255" $@
+mosquitto_pub -t "devices/lsc01/switch/switch/set" -m "20,40,off" $@
+sleep $DELAY
+mosquitto_pub -t "devices/lsc01/switch/switch/set" -m "20,40,on" $@
+sleep $DELAY
+mosquitto_pub -t "devices/lsc01/switch/switch/set" -m "20,40,off" $@
+sleep $DELAY
+mosquitto_pub -t "devices/lsc01/switch/switch/set" -m "20,40,on" $@
+sleep $DELAY
+mosquitto_pub -t "devices/lsc01/switch/switch/set" -m "20,40,off" $@
+sleep $DELAY
+mosquitto_pub -t "devices/lsc01/switch/switch/set" -m "20,40,on" $@
+sleep $DELAY
+mosquitto_pub -t "devices/lsc01/switch/switch/set" -m "20,40,off" $@
+sleep $DELAY
+mosquitto_pub -t "devices/lsc01/switch/switch/set" -m "20,40,on" $@
+sleep $DELAY
+mosquitto_pub -t "devices/lsc01/switch/switch/set" -m "20,40,off" $@
+sleep $DELAY
+mosquitto_pub -t "devices/lsc01/switch/switch/set" -m "20,40,on" $@
+
+
+sleep 10
+mosquitto_pub -t "devices/lsc01/color/color/set" -m "255,255,255" $@
+mosquitto_pub -t "devices/lsc01/brightness/brightness/set" -m "255" $@
+mosquitto_pub -t "devices/lsc01/switch/switch/set" -m "off" $@
