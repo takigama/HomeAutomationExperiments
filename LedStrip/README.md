@@ -73,4 +73,4 @@ scare you!
 Level shifter is a reproduction of sparkfun's bi-directional level shifter, as
 available here:
 
-[SparkFun Logic Level Converter](https://www.sparkfun.com/products/12009)
+![SparkFun Logic Level Converter](https://www.sparkfun.com/products/12009)
