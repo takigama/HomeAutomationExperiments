@@ -8,6 +8,9 @@ is you print the board, put its components on, then add an ESP-01 (or s).
 * [Small Demo Video](https://www.youtube.com/watch?v=C1is4zkPhkE)
 * [Pointer and Fire Modes](https://www.youtube.com/watch?v=obZJblPsRek)
 
+## The Board:
+![Board](https://raw.githubusercontent.com/takigama/HomeAutomationExperiments/master/LedStrip/images/esp-01-ledstripcontroller-02.jpg)
+
 ## Messages
 - devices/#DEVICE_ID/switch/switch/set - changes on/off
 - devices/#DEVICE_ID/switch/status - reports status here
