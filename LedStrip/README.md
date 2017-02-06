@@ -10,6 +10,7 @@ is you print the board, put its components on, then add an ESP-01 (or s).
 
 ## The Board:
 ![Board](https://raw.githubusercontent.com/takigama/HomeAutomationExperiments/master/LedStrip/images/esp-01-ledstripcontroller-02.jpg)
+![Board2](https://raw.githubusercontent.com/takigama/HomeAutomationExperiments/master/LedStrip/images/esp-01-ledstripcontroller-04.jpg)
 
 ## Messages
 - devices/#DEVICE_ID/switch/switch/set - changes on/off
