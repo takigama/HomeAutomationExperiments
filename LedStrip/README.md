@@ -65,6 +65,10 @@ shifter for the signal line - see the bom file (html format) for the components
 to get on the board. Its much easier to make than it looks, dont let SMD
 scare you!
 
+## Hookup
+
+[Hookup's](https://raw.githubusercontent.com/takigama/HomeAutomationExperiments/master/LedStrip/images/board.png)
+
 ## Attributions
 Level shifter is a reproduction of sparkfun's bi-directional level shifter, as
 available here:
