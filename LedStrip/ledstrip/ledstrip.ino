@@ -22,7 +22,8 @@ enum specialState {
   fire = 1,
   candle = 2,
   pointerforward = 3,
-  pointerbackward = 4
+  pointerbackward = 4,
+  tv = 5
 };
 
 
@@ -49,6 +50,8 @@ specialState specState = nothing;
 #define SPARKING 120
 
 
+// tv mode
+int tv_delay = 50;
 
 
 
@@ -212,6 +215,8 @@ bool lightColorHandler(HomieRange range, String value)
     rBlue = getValue(value, ',', 4).toInt();    
   } else return true;
 
+  specState = nothing;
+
   myColorWipe(sVal, eVal, rRed, rGreen, rBlue);
  
   updateState();
@@ -266,12 +271,14 @@ bool switchLight(HomieRange range, String value)
     // turn the light off
     myColorWipe(sVal, eVal, rRed, rGreen, rBlue);
     myBrightWipe(sVal, eVal, 255);
+    specState = nothing;
   } else if(sState == "fire") {
     gPal = HeatColors_p;
     specState = fire;
     myBrightWipe(0, NUM_LEDS, 255);
     myColorWipe(0, NUM_LEDS, 255, 64, 64);
-  } else if(sState == "candle") {
+  } else if(sState == "tv") {
+    specState = tv;
   } else if(sState == "pointforward") {
     specState = pointerforward;
     myBrightWipe(0, NUM_LEDS, 255);
@@ -282,6 +289,7 @@ bool switchLight(HomieRange range, String value)
     myColorWipe(0, NUM_LEDS, 255, 255, 255);
   } else {
     // turn the light off - we use the last spec'd color
+    specState = nothing;
     myBrightWipe(sVal, eVal, brightness);
     myColorWipe(sVal, eVal, 0, 0, 0);
   }
@@ -384,8 +392,34 @@ void Fire2012WithPalette()
       myleds[j].r = color.r;
       myleds[j].g = color.g;
       myleds[j].b = color.b;
-      myleds[j].br = 255;
+      myleds[j].br = brightness;
     }
+}
+
+// in tv mode we split the led into 5 segments and randomally change them
+void doTv()
+{
+  int lps = NUM_LEDS/5;
+  for(int i=0; i<5; i++) {
+    int s = i*lps;
+    int e = s+lps;
+    if(random(128)>64) {
+      tv_delay = random(40, 4096);
+      int r = random(255);
+      int b = random(255);
+      int g = random(255);
+      int br = random(255);
+
+      for(int j=s; j<e; j++) {
+        myleds[j].r = r;
+        myleds[j].b = b;
+        myleds[j].g = g;
+        myleds[j].br = br;
+      }
+    }
+  }
+
+  updateState();
 }
 
 
@@ -417,6 +451,12 @@ void makeState()
         lastUp = millis();
       }
       break;
+    case tv:
+      if((millis() - lastUp) > tv_delay) {
+        doTv();
+        lastUp = millis();
+      }
+      break;      
   }
 
   updateState();

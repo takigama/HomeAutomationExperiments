@@ -5,6 +5,8 @@ and the WS2812 led strips. The hardware component is based on the ESP-01, that
 is you print the board, put its components on, then add an ESP-01 (or s).
 
 [OSHPark Project](https://oshpark.com/shared_projects/YzHUOvOX)
+[Small Demo Video](https://www.youtube.com/watch?v=C1is4zkPhkE)
+[Pointer and Fire Modes](https://www.youtube.com/watch?v=obZJblPsRek)
 
 ## Messages
 - devices/#DEVICE_ID/switch/switch/set - changes on/off
@@ -17,7 +19,7 @@ Can be used with ranges, i.e. sending 0,20,on to switch will only turn on
 leds 0 to 20 - isnt required
 
 ## Home Assistant config
-looks very roughly like this:
+looks very roughly like this (its a moving target):
 ```
 light:
   - platform: mqtt
@@ -42,12 +44,12 @@ Note, i just started this in late october - its very much a work in progress!
 ## TODO's
 
 ### DONE
-1) Moved to fastled lib (not really liking it much) - DONE
-2) change messages to allow for sub-ranges - DONE
+1. Moved to fastled lib (not really liking it much) - DONE
+2. change messages to allow for sub-ranges - DONE
+3. add some fixed effects (fire, pointer, tv)
 
 ### Not Done
-3) add some fixed effects (fire, candle, pointer, etc)
-4) make number of leds dynamic (and saved in eeprom)
+4. make number of leds dynamic (and saved in eeprom) - trickier than i'd hoped
 
 
 
@@ -57,7 +59,8 @@ Note, i just started this in late october - its very much a work in progress!
 The kicad project is just a little daughter board for an ESP-01 that makes
 it easier to control ws2182's. 5V input with a reg on board and a level
 shifter for the signal line - see the bom file (html format) for the components
-to get on the board.
+to get on the board. Its much easier to make than it looks, dont let SMD
+care you!
 
 ## Attributions
 Level shifter is a reproduction of sparkfun's bi-directional level shifter, as
