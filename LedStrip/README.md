@@ -83,6 +83,18 @@ In the built board, i've used a 100uf 6v CAP (as per recommendations, but anythi
 that fits is suitable, there are 0.1F 5.5v caps that are quite small and would also
 fit on board.
 
+Parts from the bom:
+* BSS138 (SOT-23 package)
+* 2-10uf 6v+ Tant x 2 (1210 package)
+* 0.1-2uf 6v+ Ceramic x 2 (0805 package)
+* MCP1700 3.3v LDO Reg (SOT-23 package)
+* 10k resistor x 2 (0805 package)
+* ESP-01 x 1
+* Bunch of pin headers
+
+You can also either provide female pin headers for the ESP-01 or
+just solder it direct to the board (more compact permanently soldered)
+
 
 ## Hookup
 
