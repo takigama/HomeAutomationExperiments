@@ -72,6 +72,18 @@ shifter for the signal line - see the bom file (html format) for the components
 to get on the board. Its much easier to make than it looks, dont let SMD
 scare you!
 
+### Alternative Parts
+
+The board uses an MCP1700 Reg to create the 3.3v needed by the board. This can
+be replaced with a different REG to support higher input voltages (6v with the
+MCP1700), but can be something like an [MCP1703T](http://www.farnell.com/datasheets/1268705.pdf?_ga=1.231719964.246887079.1486429056)
+which can handle up to 16v (for 12v led strips?)
+
+In the built board, i've used a 100uf 6v CAP (as per recommendations, but anything
+that fits is suitable, there are 0.1F 5.5v caps that are quite small and would also
+fit on board.
+
+
 ## Hookup
 
 ![Hookup's](https://raw.githubusercontent.com/takigama/HomeAutomationExperiments/master/LedStrip/images/board.png)
