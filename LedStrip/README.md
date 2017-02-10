@@ -4,7 +4,7 @@ This is a little code base and a hardware board designed to work with homie
 and the WS2812 led strips. The hardware component is based on the ESP-01, that
 is you print the board, put its components on, then add an ESP-01 (or s).
 
-* [OSHPark Project](https://oshpark.com/shared_projects/YzHUOvOX)
+* [OSHPark Project](https://oshpark.com/shared_projects/sWWzDNyt)
 * [Small Demo Video](https://www.youtube.com/watch?v=C1is4zkPhkE)
 * [Pointer and Fire Modes](https://www.youtube.com/watch?v=obZJblPsRek)
 
