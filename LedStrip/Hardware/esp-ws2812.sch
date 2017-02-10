@@ -106,7 +106,7 @@ U 1 1 580E1155
 P 2000 2100
 F 0 "C2" H 2025 2200 50  0000 L CNN
 F 1 "2.2uf" H 2025 2000 50  0000 L CNN
-F 2 "SMD_Packages:SMD-1210_Pol" H 2038 1950 50  0001 C CNN
+F 2 "Capacitors_Tantalum_SMD:TantalC_SizeB_EIA-3528_Wave" H 2038 1950 50  0001 C CNN
 F 3 "" H 2000 2100 50  0000 C CNN
 F 4 "a Tant cap in the 1-10uf range - anything that fits will do" H 2000 2100 60  0001 C CNN "Notes"
 	1    2000 2100
@@ -141,7 +141,7 @@ U 1 1 580E12D2
 P 3200 2100
 F 0 "C4" H 3225 2200 50  0000 L CNN
 F 1 "2.2uf" H 3225 2000 50  0000 L CNN
-F 2 "SMD_Packages:SMD-1210_Pol" H 3238 1950 50  0001 C CNN
+F 2 "Capacitors_Tantalum_SMD:TantalC_SizeB_EIA-3528_Wave" H 3238 1950 50  0001 C CNN
 F 3 "" H 3200 2100 50  0000 C CNN
 F 4 "Any tant cap in the 1-10uf range - what ever fits will do" H 3200 2100 60  0001 C CNN "Notes"
 	1    3200 2100
