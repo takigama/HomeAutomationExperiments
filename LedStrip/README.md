@@ -96,9 +96,9 @@ You can also either provide female pin headers for the ESP-01 or
 just solder it direct to the board (more compact permanently soldered)
 
 
-## Hookup
+## Pin Layout
 
-![Hookup's](https://raw.githubusercontent.com/takigama/HomeAutomationExperiments/master/LedStrip/images/board.png)
+![Pin Layout](https://raw.githubusercontent.com/takigama/HomeAutomationExperiments/master/LedStrip/images/board_v0.3.png);
 
 ## Attributions
 Level shifter is a reproduction of sparkfun's bi-directional level shifter, as
