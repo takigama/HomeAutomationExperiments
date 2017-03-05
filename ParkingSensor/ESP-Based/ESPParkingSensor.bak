@@ -149,17 +149,6 @@ F 3 "" H 1200 1450 50  0000 C CNN
 	1    1200 1450
 	-1   0    0    1   
 $EndComp
-$Comp
-L +3V3 #PWR06
-U 1 1 5823518B
-P 1150 1900
-F 0 "#PWR06" H 1150 1750 50  0001 C CNN
-F 1 "+3V3" H 1150 2040 50  0000 C CNN
-F 2 "" H 1150 1900 50  0000 C CNN
-F 3 "" H 1150 1900 50  0000 C CNN
-	1    1150 1900
-	-1   0    0    1   
-$EndComp
 Wire Wire Line
 	1050 1750 1150 1750
 Wire Wire Line
@@ -563,4 +552,15 @@ Wire Wire Line
 	5200 1400 5100 1400
 Text Notes 650  4500 1    60   ~ 0
 Operation:\n1) 5v input (1a should be the trick)\n2) ws2812 for parking "display" - bb_line is the bit banging line\n3) magic\n4) must write some code
+$Comp
+L +5V #PWR?
+U 1 1 58288B8D
+P 1150 1900
+F 0 "#PWR?" H 1150 1750 50  0001 C CNN
+F 1 "+5V" H 1150 2040 50  0000 C CNN
+F 2 "" H 1150 1900 50  0000 C CNN
+F 3 "" H 1150 1900 50  0000 C CNN
+	1    1150 1900
+	-1   0    0    1   
+$EndComp
 $EndSCHEMATC

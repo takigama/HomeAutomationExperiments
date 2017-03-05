@@ -30,7 +30,6 @@ LIBS:contrib
 LIBS:valves
 LIBS:ESP8266
 LIBS:ESPParkingSensor-cache
-LIBS:esp-ws2812-cache
 EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
@@ -161,7 +160,7 @@ Wire Wire Line
 	4150 2500 4000 2500
 Connection ~ 4150 2000
 Text GLabel 1200 1650 2    60   Input ~ 0
-BB_LINE
+BB_LINE_5
 Text GLabel 4200 2300 2    60   Input ~ 0
 BB_LINE
 Wire Wire Line
@@ -404,10 +403,8 @@ F 3 "" H 4700 3500 50  0000 L CNN
 	1    4700 3500
 	1    0    0    -1  
 $EndComp
-Text GLabel 4800 3900 3    60   Input ~ 0
-GPIO2
 Text GLabel 4800 3100 1    60   Input ~ 0
-GPIO2_5
+BB_LINE_5
 $Comp
 L +3.3V #PWR014
 U 1 1 5823698A
@@ -563,4 +560,6 @@ F 3 "" H 1150 1900 50  0000 C CNN
 	1    1150 1900
 	-1   0    0    1   
 $EndComp
+Text GLabel 4800 3900 3    60   Input ~ 0
+BB_LINE
 $EndSCHEMATC

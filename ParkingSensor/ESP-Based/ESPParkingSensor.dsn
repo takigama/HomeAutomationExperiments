@@ -352,7 +352,7 @@
       (pins C2-1 C3-1 P2-1 C1-1 R2-1 U2-3 P5-2)
     )
     (net BB_LINE
-      (pins U1-5 P2-2)
+      (pins U1-5 Q1-2 R1-2)
     )
     (net PRG
       (pins U1-18 P3-2)
@@ -363,16 +363,14 @@
     (net ECHO
       (pins U1-6 P4-3)
     )
-    (net GPIO2
-      (pins Q1-2 R1-2)
+    (net BB_LINE_5
+      (pins P2-2 Q1-3 R2-2)
     )
-    (net GPIO2_5
-      (pins Q1-3 R2-2)
-    )
-    (class kicad_default "" +3V3 +5V BB_LINE ECHO GND GPIO2 GPIO2_5 "Net-(P1-Pad2)"
-      "Net-(P1-Pad3)" "Net-(U1-Pad1)" "Net-(U1-Pad10)" "Net-(U1-Pad11)" "Net-(U1-Pad12)"
-      "Net-(U1-Pad13)" "Net-(U1-Pad14)" "Net-(U1-Pad19)" "Net-(U1-Pad2)" "Net-(U1-Pad20)"
-      "Net-(U1-Pad4)" "Net-(U1-Pad9)" PRG TRG
+    (class kicad_default "" +3V3 +5V BB_LINE BB_LINE_5 ECHO GND GPIO2 GPIO2_5
+      "Net-(P1-Pad2)" "Net-(P1-Pad3)" "Net-(U1-Pad1)" "Net-(U1-Pad10)" "Net-(U1-Pad11)"
+      "Net-(U1-Pad12)" "Net-(U1-Pad13)" "Net-(U1-Pad14)" "Net-(U1-Pad19)"
+      "Net-(U1-Pad2)" "Net-(U1-Pad20)" "Net-(U1-Pad4)" "Net-(U1-Pad9)" PRG
+      TRG
       (circuit
         (use_via Via[0-1]_600:400_um)
       )
@@ -383,28 +381,5 @@
     )
   )
   (wiring
-    (wire (path F.Cu 600  162500 -104556  165194 -104556  165500 -104250)(net GND)(type protect))
-    (wire (path B.Cu 600  160500 -106500  160116 -106884  160116 -110000)(net GND)(type protect))
-    (wire (path F.Cu 600  162500 -104556  162444 -104556  160500 -106500)(net GND)(type protect))
-    (wire (path B.Cu 600  173616 -112616  166500 -112616  163000 -112616)(net GND)(type protect))
-    (wire (path F.Cu 600  166500 -111000  166500 -112616)(net GND)(type protect))
-    (wire (path B.Cu 600  163000 -112616  162732 -112616)(net GND)(type protect))
-    (wire (path F.Cu 600  163000 -111000  163000 -112616)(net GND)(type protect))
-    (wire (path B.Cu 600  175080 -111000  175080 -111152  173616 -112616)(net GND)(type protect))
-    (wire (path B.Cu 600  162732 -112616  160116 -110000  158500 -110000)(net GND)(type protect))
-    (wire (path B.Cu 600  175000 -93500  175000 -95116  175000 -107000)(net GND)(type protect))
-    (wire (path B.Cu 600  175080 -111000  175080 -107080  175000 -107000)(net GND)(type protect))
-    (wire (path B.Cu 600  165656 -95500  168000 -95500  173152 -95500)(net GND)(type protect))
-    (wire (path F.Cu 600  167950 -97001  167950 -95550  168000 -95500)(net GND)(type protect))
-    (wire (path B.Cu 600  173152 -95500  175000 -93652.4  175000 -93500)(net GND)(type protect))
-    (wire (path B.Cu 600  162500 -93960  164116 -93960  165656 -95500)(net GND)(type protect))
-    (wire (path B.Cu 600  158500 -93960  162500 -93960)(net GND)(type protect))
-    (wire (path B.Cu 600  154900 -94600  155540 -93960  158500 -93960)(net GND)(type protect))
-    (wire (path B.Cu 600  153000 -94600  154900 -94600)(net GND)(type protect))
-    (wire (path B.Cu 600  151000 -94600  153000 -94600)(net GND)(type protect))
-    (via "Via[0-1]_600:400_um"  160500 -106500 (net GND)(type protect))
-    (via "Via[0-1]_600:400_um"  166500 -112616 (net GND)(type protect))
-    (via "Via[0-1]_600:400_um"  163000 -112616 (net GND)(type protect))
-    (via "Via[0-1]_600:400_um"  168000 -95500 (net GND)(type protect))
   )
 )
