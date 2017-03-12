@@ -14,7 +14,7 @@ chip. If unneeded, they can be replaced or not connected at all
 
 ## Homie + ESP8266
 
-This boarrd was designed with homie in mind and uses MQTT to comm's
+This board was designed with homie in mind and uses MQTT to comm's
 with its controller. In my case, Home Assistant. As this hasnt been
 written yet, i'll get back to you shortly!
 
