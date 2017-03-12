@@ -7,6 +7,7 @@ is you print the board, put its components on, then add an ESP-01 (or s).
 * [OSHPark Project](https://oshpark.com/shared_projects/sWWzDNyt)
 * [Small Demo Video](https://www.youtube.com/watch?v=C1is4zkPhkE)
 * [Pointer and Fire Modes](https://www.youtube.com/watch?v=obZJblPsRek)
+* [Putting it together video](https://youtu.be/5BQnyncV6P0)
 
 Technically, the board could be used to drive anything if all you need is 5v
 input, 1x5v GPIO and 3 x 3.3v GPIO (TX/RX can be used for multiple things, 
