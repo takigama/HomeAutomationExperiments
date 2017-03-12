@@ -6,11 +6,11 @@ be left off if not needed. For EG, it uses 4 transistors, one for each
 of 4 IR leds, each can handle about 500ma of output at 5v, which means
 all 4 together give about 2a across 4 connectors so size appropriately
 
-The board also has a USB uart chip in the form of a FT230XS FTDI chip
-which isn't necessary if you already have a USB uart device. Theres
-also support for a temperature (DS18B20) single wire interface chip
-and a TEMT6000 ambient light sensor connected to the ADC of the ESP
-chip. If unneeded, they can be replaced or not connected at all
+The board has a connections for a TEMT6000 Light sensor as well as the
+DS18B20 single wire temperature chip. All the spare GPIO's are exposed
+as well as the SPI interface to be used for whatever you like. The ADC
+pin of the ESP is connected to the light sensor, so if you want to use
+it for a different purpose, you can connect it there.
 
 ## Homie + ESP8266
 
