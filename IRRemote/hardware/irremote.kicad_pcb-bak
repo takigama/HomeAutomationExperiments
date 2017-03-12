@@ -3,9 +3,9 @@
   (general
     (links 95)
     (no_connects 0)
-    (area 100.024999 47.534523 180.387584 87.6525)
+    (area 106.424999 51.424999 175.075001 83.575001)
     (thickness 1.6)
-    (drawings 21)
+    (drawings 22)
     (tracks 455)
     (zones 0)
     (modules 41)
@@ -1512,7 +1512,10 @@
     (pad 1 thru_hole circle (at 0 0) (size 2.5 2.5) (drill 2.5) (layers))
   )
 
-  (gr_text GPIO (at 127.0635 66.7385 90) (layer F.SilkS) (tstamp 58C539B8)
+  (gr_text "IR OUT x 4" (at 144.7165 70.104) (layer F.SilkS) (tstamp 58C53CA2)
+    (effects (font (size 1 1) (thickness 0.25)))
+  )
+  (gr_text SPI (at 127.0635 66.7385 90) (layer F.SilkS) (tstamp 58C539B8)
     (effects (font (size 1 1) (thickness 0.25)))
   )
   (gr_text GPIO (at 128.3335 82.2325) (layer F.SilkS) (tstamp 58C539A9)
