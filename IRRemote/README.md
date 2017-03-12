@@ -27,4 +27,4 @@ written yet, i'll get back to you shortly!
 I've not even built this board yet, so here be dragons! yarrr, but
 here be the board on OSH Park:
 
-[Link](https://oshpark.com/shared_projects/vwTebHdx)
+[Link](https://oshpark.com/shared_projects/6rSS0T7z)

@@ -11,18 +11,18 @@
     (via_costs 50)
     (plane_via_costs 5)
     (start_ripup_costs 100)
-    (start_pass_no 1611)
+    (start_pass_no 530)
     (layer_rule F.Cu
       (active on)
       (preferred_direction horizontal)
       (preferred_direction_trace_costs 1.0)
-      (against_preferred_direction_trace_costs 3.1)
+      (against_preferred_direction_trace_costs 2.7)
     )
     (layer_rule B.Cu
       (active on)
       (preferred_direction vertical)
       (preferred_direction_trace_costs 1.0)
-      (against_preferred_direction_trace_costs 1.5)
+      (against_preferred_direction_trace_costs 1.6)
     )
   )
   (rule
@@ -81,10 +81,9 @@
     )
   )
   (class "kicad_default"
-    "IR_IN" "TEMP_READ" "Net-(C5-Pad2)" "Net-(P4-Pad2)" "Net-(P4-Pad4)" "Net-(P4-Pad6)" "Net-(P4-Pad8)" "RXD_UA_1"
-    "TXD_UA_1" "Net-(P6-Pad1)" "Net-(P6-Pad2)" "Net-(P6-Pad3)" "Net-(P6-Pad4)" "Net-(P6-Pad5)" "Net-(P7-Pad1)" "Net-(P7-Pad2)"
-    "Net-(P7-Pad3)" "Net-(P7-Pad4)" TEMT "Net-(R6-Pad1)" "Net-(R7-Pad2)" "Net-(R8-Pad1)" "Net-(R9-Pad1)" "Net-(R10-Pad2)"
-    "Net-(R11-Pad2)" "Net-(R12-Pad2)" "Net-(U3-Pad2)" "USBDM_1_N" "USBDP_1_P" "Net-(R13-Pad1)" "Net-(R14-Pad1)"
+    "IR_IN" "TEMP_READ" "RXD_UA_1" "TXD_UA_1" "Net-(P6-Pad1)" "Net-(P6-Pad2)" "Net-(P6-Pad3)" "Net-(P6-Pad4)"
+    "Net-(P6-Pad5)" "Net-(P7-Pad1)" "Net-(P7-Pad2)" "Net-(P7-Pad3)" "Net-(P7-Pad4)" TEMT "Net-(R8-Pad1)" "Net-(R9-Pad1)"
+    "Net-(R10-Pad2)" "Net-(R11-Pad2)" "Net-(R12-Pad2)"
     (clearance_class "kicad_default")
     (via_rule kicad_default)
     (rule
@@ -106,18 +105,17 @@
     )
   )
   (class 5v
-    +5V "LED_DR_5"
+    GND +5V "LED_DR_5" "Net-(P4-Pad2)" "Net-(P4-Pad4)" "Net-(P4-Pad6)" "Net-(P4-Pad8)"
     (clearance_class 5v)
     (via_rule 5v)
     (rule
-      (width 350.0)
+      (width 600.0)
     )
     (circuit 
       (use_layer F.Cu B.Cu)
     )
   )
   (class GND
-    GND
     (clearance_class GND)
     (via_rule GND)
     (rule
