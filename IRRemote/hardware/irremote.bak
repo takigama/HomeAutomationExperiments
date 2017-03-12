@@ -501,9 +501,9 @@ Text GLabel 6000 5850 2    60   Input ~ 0
 USBDM_1_N
 Text GLabel 1700 5150 0    60   Input ~ 0
 RXD_UA_1
-Text GLabel 4100 1450 1    60   Input ~ 0
+Text GLabel 4100 1000 1    60   Input ~ 0
 TXD_UA_1
-Text GLabel 4250 1450 1    60   Input ~ 0
+Text GLabel 4250 1000 1    60   Input ~ 0
 RXD_UA_1
 $Comp
 L CONN_01X04 P5
@@ -1148,4 +1148,30 @@ Wire Wire Line
 	8750 3750 8650 3750
 Wire Wire Line
 	8650 3750 8650 3650
+$Comp
+L R R?
+U 1 1 58C4A727
+P 4100 1300
+F 0 "R?" V 4180 1300 50  0000 C CNN
+F 1 "470" V 4100 1300 50  0000 C CNN
+F 2 "Resistors_SMD:R_0805_HandSoldering" V 4030 1300 50  0001 C CNN
+F 3 "" H 4100 1300 50  0000 C CNN
+	1    4100 1300
+	-1   0    0    1   
+$EndComp
+$Comp
+L R R?
+U 1 1 58C4A7E7
+P 4250 1300
+F 0 "R?" V 4330 1300 50  0000 C CNN
+F 1 "470" V 4250 1300 50  0000 C CNN
+F 2 "Resistors_SMD:R_0805_HandSoldering" V 4180 1300 50  0001 C CNN
+F 3 "" H 4250 1300 50  0000 C CNN
+	1    4250 1300
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	4250 1000 4250 1150
+Wire Wire Line
+	4100 1150 4100 1000
 $EndSCHEMATC
