@@ -25,6 +25,6 @@ written yet, i'll get back to you shortly!
 ## Warning!
 
 I've not even built this board yet, so here be dragons! yarrr, but
-here be the board on osh park:
+here be the board on OSH Park:
 
 [Link](https://oshpark.com/shared_projects/vwTebHdx)
