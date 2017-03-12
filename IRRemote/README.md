@@ -22,3 +22,6 @@ written yet, i'll get back to you shortly!
 
 ![Layout](https://raw.githubusercontent.com/takigama/HomeAutomationExperiments/master/IRRemote/3dView.png);
 
+## Warning!
+
+I've not even built this board yet, so here be dragons! yarrr
