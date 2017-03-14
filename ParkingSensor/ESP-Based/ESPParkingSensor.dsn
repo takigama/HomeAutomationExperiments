@@ -37,16 +37,16 @@
       (place U1 139000 -108600 front 90 (PN "ESP-12E"))
     )
     (component Pin_Headers:Pin_Header_Straight_1x04
-      (place P1 158500 -110000 front 180 (PN CONN_UART))
-      (place P4 167380 -93500 front 90 (PN CONN_US))
+      (place P1 158500 -110998 front 180 (PN CONN_UART))
+      (place P4 166878 -93853 front 90 (PN CONN_US))
     )
     (component Capacitors_SMD:C_0805_HandSoldering
-      (place C2 165500 -103000 front 270 (PN 0.1uf))
-      (place C4 166500 -109750 front 270 (PN 0.1uf))
+      (place C2 165608 -104775 front 270 (PN 0.1uf))
+      (place C4 165989 -109982 front 90 (PN 0.1uf))
     )
     (component "SMD_Packages:SMD-1210_Pol"
-      (place C3 162500 -102778 front 270 (PN 2.2uf))
-      (place C5 163000 -109222 front 270 (PN 2.2uf))
+      (place C3 162306 -102489 front 270 (PN 2.2uf))
+      (place C5 162306 -109220 front 90 (PN 2.2uf))
     )
     (component Pin_Headers:Pin_Header_Straight_1x03
       (place P2 170000 -111000 front 90 (PN CONN_WS2812))
@@ -56,15 +56,17 @@
       (place P5 162500 -93960 front 0 (PN CONN_01X02))
     )
     (component Capacitors_ThroughHole:C_Radial_D6.3_L11.2_P2.5
-      (place C1 172500 -107000 back 180 (PN 1000uf))
+      (place C1 171958 -107442 back 180 (PN 1000uf))
     )
     (component "TO_SOT_Packages_SMD:SOT-23"
-      (place Q1 172000 -102002 front 180 (PN BSS138))
-      (place U2 167000 -98001.8 front 180 (PN MCP1700))
+      (place Q1 171958 -103759 front 180 (PN BSS138))
+      (place U2 166751 -100330 front 180 (PN MCP1700))
     )
     (component Resistors_SMD:R_0805_HandSoldering
-      (place R1 172350 -98000 front 180 (PN 10k))
-      (place R2 168500 -102850 front 270 (PN 10k))
+      (place R1 167259 -97028 front 180 (PN 10k))
+      (place R2 168021 -104775 front 270 (PN 10k))
+      (place R3 173101 -97282 front 0 (PN 1.7k))
+      (place R4 173101 -99568 front 0 (PN 3.3k))
     )
   )
   (library
@@ -337,7 +339,7 @@
   )
   (network
     (net GND
-      (pins U1-15 U1-16 P1-1 C2-2 C3-2 C4-2 P2-3 P3-1 P4-4 C1-2 C5-2 U2-1 P5-1)
+      (pins U1-15 U1-16 P1-1 C2-2 C3-2 C4-2 P2-3 P3-1 P4-4 C1-2 C5-2 U2-1 P5-1 R4-2)
     )
     (net "Net-(P1-Pad2)"
       (pins U1-22 P1-2)
@@ -346,10 +348,10 @@
       (pins U1-21 P1-3)
     )
     (net +3V3
-      (pins U1-3 U1-8 U1-17 P1-4 C4-1 P4-1 C5-1 Q1-1 R1-1 U2-2)
+      (pins U1-3 U1-8 U1-17 P1-4 C4-1 C5-1 Q1-1 R1-1 U2-2)
     )
     (net +5V
-      (pins C2-1 C3-1 P2-1 C1-1 R2-1 U2-3 P5-2)
+      (pins C2-1 C3-1 P2-1 P4-1 C1-1 R2-1 U2-3 P5-2)
     )
     (net BB_LINE
       (pins U1-5 Q1-2 R1-2)
@@ -361,13 +363,16 @@
       (pins U1-7 P4-2)
     )
     (net ECHO
-      (pins U1-6 P4-3)
+      (pins P4-3 R3-1)
     )
     (net BB_LINE_5
       (pins P2-2 Q1-3 R2-2)
     )
-    (class kicad_default "" +3V3 +5V BB_LINE BB_LINE_5 ECHO GND GPIO2 GPIO2_5
-      "Net-(P1-Pad2)" "Net-(P1-Pad3)" "Net-(U1-Pad1)" "Net-(U1-Pad10)" "Net-(U1-Pad11)"
+    (net "Net-(R3-Pad2)"
+      (pins U1-6 R3-2 R4-1)
+    )
+    (class kicad_default "" +3V3 +5V BB_LINE BB_LINE_5 ECHO GND "Net-(P1-Pad2)"
+      "Net-(P1-Pad3)" "Net-(R3-Pad2)" "Net-(U1-Pad1)" "Net-(U1-Pad10)" "Net-(U1-Pad11)"
       "Net-(U1-Pad12)" "Net-(U1-Pad13)" "Net-(U1-Pad14)" "Net-(U1-Pad19)"
       "Net-(U1-Pad2)" "Net-(U1-Pad20)" "Net-(U1-Pad4)" "Net-(U1-Pad9)" PRG
       TRG
