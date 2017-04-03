@@ -24,7 +24,15 @@ written yet, i'll get back to you shortly!
 
 ## Warning!
 
-I've not even built this board yet, so here be dragons! yarrr, but
-here be the board on OSH Park:
+I've only just got this board back from oshpark. Built one of them and
+so far had no issue with temperature and IR reading. Haven't tested IR
+send yet, but will be coming soon. The Repo will update with code shortly
+
+## Changes
+
+* kinda want to put in a micro usb to provide power to the board... 
+difficult choice to make at the moment.
+* flip the ir header? tricky choice.
+* push button headers are actually slightly smallr than they should be
 
 [Link](https://oshpark.com/shared_projects/DOv10233)
