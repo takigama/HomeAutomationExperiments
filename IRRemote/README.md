@@ -20,13 +20,16 @@ written yet, i'll get back to you shortly!
 
 ## Image
 
-![Layout](https://raw.githubusercontent.com/takigama/HomeAutomationExperiments/master/IRRemote/3dView.png);
+![Layout](https://raw.githubusercontent.com/takigama/HomeAutomationExperiments/master/IRRemote/3dView.png)
 
 ## Warning!
 
-I've only just got this board back from oshpark. Built one of them and
-so far had no issue with temperature and IR reading. Haven't tested IR
-send yet, but will be coming soon. The Repo will update with code shortly
+Only just got the board back from OSHPark, but so far it works ok. I've
+managed to control a device via IR after learning its IR message via
+learning it using the ESP8266 IR library. Fairly happy so far. Temperature
+is also working quite well
+
+![built](https://raw.githubusercontent.com/takigama/HomeAutomationExperiments/master/IRRemote/images/build1.jpg)
 
 ## Changes
 
