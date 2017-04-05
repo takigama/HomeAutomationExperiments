@@ -20,7 +20,7 @@ written yet, i'll get back to you shortly!
 
 ## Image
 
-![Layout](https://raw.githubusercontent.com/takigama/HomeAutomationExperiments/master/IRRemote/3dView.png)
+![Layout](https://raw.githubusercontent.com/takigama/HomeAutomationExperiments/master/IRRemote/images/3dView.png)
 
 ## Warning!
 
