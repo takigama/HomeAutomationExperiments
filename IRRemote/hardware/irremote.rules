@@ -11,7 +11,7 @@
     (via_costs 50)
     (plane_via_costs 5)
     (start_ripup_costs 100)
-    (start_pass_no 530)
+    (start_pass_no 502)
     (layer_rule F.Cu
       (active on)
       (preferred_direction horizontal)
@@ -81,9 +81,9 @@
     )
   )
   (class "kicad_default"
-    "IR_IN" "TEMP_READ" "RXD_UA_1" "TXD_UA_1" "Net-(P6-Pad1)" "Net-(P6-Pad2)" "Net-(P6-Pad3)" "Net-(P6-Pad4)"
-    "Net-(P6-Pad5)" "Net-(P7-Pad1)" "Net-(P7-Pad2)" "Net-(P7-Pad3)" "Net-(P7-Pad4)" TEMT "Net-(R8-Pad1)" "Net-(R9-Pad1)"
-    "Net-(R10-Pad2)" "Net-(R11-Pad2)" "Net-(R12-Pad2)"
+    "IR_IN" "TEMP_READ" "Net-(P4-Pad2)" "Net-(P4-Pad4)" "Net-(P4-Pad6)" "Net-(P4-Pad8)" "RXD_UA_1" "TXD_UA_1"
+    "Net-(P6-Pad1)" "Net-(P6-Pad2)" "Net-(P6-Pad3)" "Net-(P6-Pad4)" "Net-(P6-Pad5)" "Net-(P7-Pad1)" "Net-(P7-Pad2)" "Net-(P7-Pad3)"
+    "Net-(P7-Pad4)" TEMT "Net-(R8-Pad1)" "Net-(R9-Pad1)" "Net-(R10-Pad2)" "Net-(R11-Pad2)" "Net-(R12-Pad2)"
     (clearance_class "kicad_default")
     (via_rule kicad_default)
     (rule
@@ -105,17 +105,18 @@
     )
   )
   (class 5v
-    GND +5V "LED_DR_5" "Net-(P4-Pad2)" "Net-(P4-Pad4)" "Net-(P4-Pad6)" "Net-(P4-Pad8)"
+    +5V "LED_DR_5"
     (clearance_class 5v)
     (via_rule 5v)
     (rule
-      (width 600.0)
+      (width 350.0)
     )
     (circuit 
       (use_layer F.Cu B.Cu)
     )
   )
   (class GND
+    GND
     (clearance_class GND)
     (via_rule GND)
     (rule
