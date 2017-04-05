@@ -26,10 +26,10 @@ written yet, i'll get back to you shortly!
 
 Only just got the board back from OSHPark, but so far it works ok. I've
 managed to control a device via IR after learning its IR message via
-learning it using the ESP8266 IR library. Fairly happy so far. Temperature
-is also working quite well. Only issue i have with it is that the SMD
-push button footprint I used is slightly smaller then the actual PB's
-I have, which made soldering them on quite the pain.
+the ESP8266 IR library. Fairly happy so far. Temperature is also working
+quite well. Only issue i have with it is that the SMD push button 
+footprint I used is slightly smaller then the actual PB's I have, which
+made soldering them on quite the pain.
 
 ![built](https://raw.githubusercontent.com/takigama/HomeAutomationExperiments/master/IRRemote/images/build1.jpg)
 
