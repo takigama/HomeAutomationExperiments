@@ -39,4 +39,4 @@ made soldering them on quite the pain.
 * flipped the IR receiver so its pointing outward
 * fixed the push buttons for the correct SMD push button
 
-OshPark Project: [Link](https://oshpark.com/shared_projects/sFoxZDDd)
+OshPark Project: [Link](https://oshpark.com/shared_projects/F54xaFnq)
