@@ -40,4 +40,4 @@ difficult choice to make at the moment.
 * flip the ir header? tricky choice.
 * push button headers are actually slightly smaller than they should be
 
-[Link](https://oshpark.com/shared_projects/sel44Ce7)
+OshPark Project: [Link](https://oshpark.com/shared_projects/sel44Ce7)
