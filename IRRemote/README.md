@@ -35,9 +35,8 @@ made soldering them on quite the pain.
 
 ## Changes
 
-* kinda want to put in a micro usb to provide power to the board... 
-difficult choice to make at the moment.
-* flip the ir header? tricky choice.
-* push button headers are actually slightly smaller than they should be
+* moved to a microusb connector for power
+* flipped the IR receiver so its pointing outward
+* fixed the push buttons for the correct SMD push button
 
 OshPark Project: [Link](https://oshpark.com/shared_projects/sFoxZDDd)
