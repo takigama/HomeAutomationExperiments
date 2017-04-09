@@ -172,6 +172,9 @@ void doIrRecv(decode_results *r)
 
   // End declaration
   Serial.println("};");  // 
+  if(r->overflow) {
+    Serial.println("overflow true");
+  }
 }
 
 
@@ -210,6 +213,7 @@ bool irSendHandler(HomieRange range, String value)
 
   irrecv.disableIRIn();
 
+
   Serial.println("about to send IR");
   Serial.println(value);
   String enc = getValue(value, ',', 0);
@@ -226,6 +230,14 @@ bool irSendHandler(HomieRange range, String value)
     irsend.sendNEC(rval,bits.toInt());
 //    Serial.println("after irsend");
   }
+
+//   testng for one device i just cant make work - a pioneer vsx-522 - GC says: sendir,1:1,1,40000,1,1,360,180,22,67,22,22,22,67,....
+//   but i cant make it work for love nor money
+//  unsigned int  rawData[67] = {8500,4250, 600,1600, 550,500, 600,1600, 550,500, 600,500, 600,1600, 550,500, 600,1600, 550,500, 600,1600, 550,500, 600,1600, 550,1600, 550,500, 600,1600, 550,500, 600,500, 600,500, 600,1600, 550,1600, 550,1600, 550,500, 550,500, 600,500, 600,1600, 550,1600, 550,500, 600,500, 600,500, 600,1600, 550,1600, 550,1600, 550};
+//  irsend.sendRaw(rawData, sizeof(rawData) / sizeof(rawData[0]), 40);
+//  irsend.enableIROut(40);
+//  unsigned int Samsung_power_toggle[71] = {40000,1,1,360,180,22,67,22,22,22,67,22,22,22,22,22,67,22,22,22,67,22,22,22,67,22,22,22,67,22,67,22,22,22,67,22,22,22,22,22,22,22,67,22,67,22,67,22,22,22,22,22,22,22,67,22,67,22,22,22,22,22,22,22,67,22,67,22,67,22,989};
+//  irsend.sendGC(Samsung_power_toggle, 71);
 
   irrecv.enableIRIn();
   ignoreloop = false;
