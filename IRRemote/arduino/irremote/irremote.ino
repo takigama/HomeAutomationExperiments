@@ -216,7 +216,7 @@ bool irSendHandler(HomieRange range, String value)
   String bits = getValue(value, ',', 1);
   String val = getValue(value, ',', 2);
   val.toCharArray(val_c, 128);
-  long rval = strtol(val_c, NULL, 16);
+  unsigned long rval = strtoul(val_c, NULL, 16);
 
   if(enc == "NEC") {
     // for now i only handle nec cause im lazy
