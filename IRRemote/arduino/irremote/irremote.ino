@@ -44,6 +44,12 @@ decode_results results;
 // temp check interval
 unsigned long tc_interval = 60000ul;
 
+// last light val
+unsigned int lightVal = 0;
+
+// how much change in light before we report (percent change)
+unsigned int lightRepDiff = 10;
+
 
 // define out homie components
 HomieNode Temp("temperature", "temperature");
@@ -78,6 +84,21 @@ void doTemp()
     }
 
     lastTempMillis = cMillis;
+  }
+}
+
+void doLight()
+{ 
+  unsigned int lval, dval;
+
+  lval = analogRead(A0);
+
+  dval = abs(lval - lightVal)*100;
+
+  if((dval/lightVal) > lightRepDiff) {
+    // we report the light val
+    AmbLight.setProperty("AmbientLight").send(String(lval));
+    lightVal = lval;
   }
 }
 
@@ -269,6 +290,7 @@ void loopHandler()
   }
 
   doTemp();
+  doLight();
 
 }
 
@@ -277,6 +299,8 @@ void loopHandler()
 void  setup()
 {
   Serial.begin(9600);
+
+  pinMode(A0, INPUT);
 
 
   // for some reason, whatever homie does on pin 16 kills the serial - not sure why
@@ -308,7 +332,6 @@ void loop()
 {
   if(ignoreloop) return;
   cMillis = millis();
-
 
   
   Homie.loop();
