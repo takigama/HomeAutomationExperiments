@@ -1,3 +1,17 @@
+# Dont build this....
+
+Im currently in the process of re-designing this board based on the tasmota
+firmware so I would hold off building one of these boards in favour of my new
+uTasmota board - very similar size, and more flexible.
+
+If you really do want to build this board, go ahead, but rather than using
+my own homie-based firmware, flash the tasmota firmware (make sure you using
+a board that has 1mb of flash, not 512k).
+
+.... continueing on...
+
+
+
 # Led strip for ESP8266 with homie and hardware
 
 This is a little code base and a hardware board designed to work with homie
