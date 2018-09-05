@@ -29,7 +29,6 @@ LIBS:atmel
 LIBS:contrib
 LIBS:valves
 LIBS:ESP8266
-LIBS:tmicro-cache-cache
 EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
@@ -137,7 +136,7 @@ U 1 1 580E1D98
 P 950 5000
 F 0 "Q1" H 1150 5075 50  0000 L CNN
 F 1 "IRLML6244" H 1150 5000 50  0000 L CNN
-F 2 "TO_SOT_Packages_SMD:SOT-23" H 1150 4925 50  0000 L CIN
+F 2 "SMD:SOT-23" H 1150 4925 50  0000 L CIN
 F 3 "" H 950 5000 50  0000 L CNN
 	1    950  5000
 	0    1    1    0   
@@ -240,17 +239,25 @@ $EndComp
 Wire Wire Line
 	1550 2350 1550 2300
 Wire Wire Line
-	1550 2300 2950 2300
+	1550 2300 1750 2300
+Wire Wire Line
+	1750 2300 2350 2300
+Wire Wire Line
+	2350 2300 2950 2300
 Wire Wire Line
 	2950 2300 2950 2250
 Wire Wire Line
 	3550 1850 3550 1800
 Wire Wire Line
-	2650 1850 3550 1850
+	2650 1850 2950 1850
+Wire Wire Line
+	2950 1850 3550 1850
 Wire Wire Line
 	1550 1750 1550 1850
 Wire Wire Line
-	1550 1850 2050 1850
+	1550 1850 1750 1850
+Wire Wire Line
+	1750 1850 2050 1850
 Wire Wire Line
 	1750 1950 1750 1850
 Connection ~ 1750 1850
@@ -292,7 +299,7 @@ U 1 1 5B60A003
 P 2550 5000
 F 0 "Q2" H 2750 5075 50  0000 L CNN
 F 1 "IRLML6244" H 2750 5000 50  0000 L CNN
-F 2 "TO_SOT_Packages_SMD:SOT-23" H 2750 4925 50  0000 L CIN
+F 2 "SMD:SOT-23" H 2750 4925 50  0000 L CIN
 F 3 "" H 2550 5000 50  0000 L CNN
 	1    2550 5000
 	0    1    1    0   
@@ -356,7 +363,9 @@ F 3 "" H 4800 5400 50  0000 C CNN
 	0    1    1    0   
 $EndComp
 Wire Wire Line
-	4650 5050 4850 5050
+	4650 5050 4750 5050
+Wire Wire Line
+	4750 5050 4850 5050
 Wire Wire Line
 	4850 5050 4850 5200
 Wire Wire Line
@@ -385,7 +394,9 @@ F 3 "" H 4950 3650 50  0000 C CNN
 	0    1    1    0   
 $EndComp
 Wire Wire Line
-	4800 3300 5000 3300
+	4800 3300 4900 3300
+Wire Wire Line
+	4900 3300 5000 3300
 Wire Wire Line
 	5000 3300 5000 3450
 Wire Wire Line
@@ -416,7 +427,9 @@ $EndComp
 Wire Wire Line
 	4700 1800 4600 1800
 Wire Wire Line
-	4600 1800 4600 2100
+	4600 1800 4600 2050
+Wire Wire Line
+	4600 2050 4600 2100
 Wire Wire Line
 	4450 1700 4450 1600
 Wire Wire Line
@@ -438,7 +451,9 @@ F 3 "" H 6800 3650 50  0000 C CNN
 	0    1    1    0   
 $EndComp
 Wire Wire Line
-	6650 3300 6850 3300
+	6650 3300 6750 3300
+Wire Wire Line
+	6750 3300 6850 3300
 Wire Wire Line
 	6850 3300 6850 3450
 Wire Wire Line
@@ -484,7 +499,9 @@ Wire Wire Line
 Wire Wire Line
 	7250 5000 7250 5150
 Wire Wire Line
-	7250 5150 7600 5150
+	7250 5150 7500 5150
+Wire Wire Line
+	7500 5150 7600 5150
 Wire Wire Line
 	7450 4600 7500 4600
 Wire Wire Line
@@ -501,4 +518,6 @@ F 3 "" H 2350 1850 50  0000 C CNN
 	1    2350 1850
 	1    0    0    -1  
 $EndComp
+Text Notes 700  6400 0    60   ~ 0
+The resistor used in the MOSFET switches need to\nbe calculated on a use case basis.\nFor EG, if you wanted to use the TSAL6100 IR emitter\nyou would want 36ohms assuming a 5v power supply\ninput
 $EndSCHEMATC
