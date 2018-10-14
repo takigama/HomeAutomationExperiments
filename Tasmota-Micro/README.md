@@ -35,7 +35,7 @@ with these tools just to make sure it could be done easily enough.
 Generally I would normally use solder paste and a heatgun for the SMD
 components, then hand solder in the connectors. Also note, in the images, i've
 put JST connectors on there, this is just a serving suggestion, its not a
-requirement.
+requirement and I wouldn't recommend it.
 
 Also note, for the ESP module in the images, i've put on a 4x2 header so I
 can easily remove the ESP-01 module - this isnt a requirement as it makes
@@ -49,25 +49,29 @@ clips to do it.
 
 Proves both raw input voltage or raw output voltage - i.e. you can push
 power into the unit via one of these pins or provide power at the input
-voltage as output (i.e. if your driving from USB these pins are 5v)
+voltage as output (i.e. if your driving from USB these pins are 5v). Maximum
+input voltate is 16v according to the MCP1703 tech specs, but I wouldn't
+have a need to go beyond 12v myself.
 
 ### P3
 
 These are the mosfet switched versions of GPIO2 and the RX line. They also
 include current limiting resistors, R1 and R2 - you must size these
 appropriaely for your project (or just bridge them and put resistors on
-your actual device.
+your actual device).
 
 ### P4
 
 This header provides all 4 GPIO's as direct connections on the ESP at the
-level of the ESP itself (3.3v)
+level of the ESP itself (3.3v), be aware though that depending on the state
+of the ESP itself (which can draw about 170ma max - apparently), you can only
+draw a maxmimum of about 80ma!.
 
 ### P5 
 
 Output from the MCP1703 regulator is provided on these pins. This would
 typically be 3.3v but if you've put in your own changes, what comes out
-there is on you.
+there is up to you, i.e. configure that in the tasmota gui.
 
 ### P6
 
