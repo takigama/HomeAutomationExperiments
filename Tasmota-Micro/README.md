@@ -27,7 +27,7 @@ All resistors and caps are 0805 size. Diode is SMA.
 
 ## Putting it together
 
-Personally, my firt one was a hand solder job with a nothing-special type
+Personally, my first one was a hand solder job with a nothing-special type
 of soldering iron and I found this to be quite easy (though I used a handheld
 magnifying glass to get the components lined up). I put the first one together
 with these tools just to make sure it could be done easily enough.
