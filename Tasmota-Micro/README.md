@@ -47,6 +47,8 @@ clips to do it.
 
 ## Connectors
 
+![Connectors](https://raw.githubusercontent.com/takigama/HomeAutomationExperiments/master/Tasmota-Micro/Hardware/images/layout.png)
+
 ### P2
 
 Proves both raw input voltage or raw output voltage - i.e. you can push
