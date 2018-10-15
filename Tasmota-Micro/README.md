@@ -1,5 +1,7 @@
 # The Tasmota Micro board
 
+![Front On](https://raw.githubusercontent.com/takigama/HomeAutomationExperiments/master/Tasmota-Micro/Hardware/images/20181015_023856_ws.jpg)
+![Side On](https://raw.githubusercontent.com/takigama/HomeAutomationExperiments/master/Tasmota-Micro/Hardware/images/20181015_024028_ws.jpg)
 
 The tasmota micro (hope they dont mine me calling it that) is based off my
 ledstrip controller with alot more flexibility build it. Its quite straight
