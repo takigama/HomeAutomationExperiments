@@ -62,7 +62,7 @@ have a need to go beyond 12v myself.
 These are the mosfet switched versions of GPIO2 and the RX line. They also
 include current limiting resistors, R1 and R2 - you must size these
 appropriaely for your project (or just bridge them and put resistors on
-your actual device).
+your actual device). Note, these pull to ground!
 
 ### P4
 
