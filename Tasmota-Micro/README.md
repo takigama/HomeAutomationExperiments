@@ -109,7 +109,7 @@ they must be sized to suit your needs (if putting them on the board). As an
 example, I have one with a 47ohm resistor (to drive the TSAL6000 IR emitter)
 and one with a 150ohm resistor (cause why not?).
 
-Also not the mosfet i've put in the bom on this are rated for 6a, however I
+Also note the mosfet i've put in the bom on this are rated for 6a, however I
 wouldn't push my luck with it as the tracks can probably only withstand about
 2A depending on the thickness of the solder traces and where you get them made.
 Personally, I use OSH Park (note the connector the USB is designed with
