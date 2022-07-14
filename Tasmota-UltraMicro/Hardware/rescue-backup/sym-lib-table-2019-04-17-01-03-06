@@ -1,0 +1,4 @@
+(sym_lib_table
+  (lib (name tmicro-rescue)(type Legacy)(uri ${KIPRJMOD}/tmicro-rescue.lib)(options "")(descr ""))
+  (lib (name ESP8266)(type Legacy)(uri /home/paulr/owncloud.home/Electronics/KiCadLibs-Ext/kicad-ESP8266/ESP8266.lib)(options "")(descr ""))
+)

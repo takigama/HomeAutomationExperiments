@@ -1,4 +1,4 @@
-update=Mon 15 Nov 2021 03:23:49
+update=Wed 17 Apr 2019 01:03:08 AEST
 version=1
 last_client=kicad
 [cvpcb]
@@ -8,7 +8,7 @@ NetIExt=net
 version=1
 [schematic_editor]
 version=1
-PageLayoutDescrFile=/home/paulr/owncloud.home/Arduino/HomeAutomation/kicad-zero-frame.kicad_wks
+PageLayoutDescrFile=/home/paulr/owncloud.home/Electronics/kicad-zero-frame.kicad_wks
 PlotDirectoryName=
 SubpartIdSeparator=0
 SubpartFirstId=65
@@ -18,7 +18,7 @@ SpiceUseNetNumbers=0
 LabSize=60
 [pcbnew]
 version=1
-PageLayoutDescrFile=/home/paulr/owncloud.home/Arduino/HomeAutomation/kicad-zero-frame.kicad_wks
+PageLayoutDescrFile=/home/paulr/owncloud.home/Electronics/kicad-zero-frame.kicad_wks
 LastNetListRead=
 PadDrill=0.762
 PadDrillOvalY=0.762

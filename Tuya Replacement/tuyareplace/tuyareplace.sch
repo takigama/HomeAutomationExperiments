@@ -1,0 +1,248 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L RF_Module:ESP-12E U1
+U 1 1 5F8C53AF
+P 6250 3200
+F 0 "U1" V 6204 4044 50  0000 L CNN
+F 1 "ESP-12E" V 6295 4044 50  0000 L CNN
+F 2 "RF_Module:ESP-12E" H 6250 3200 50  0001 C CNN
+F 3 "http://wiki.ai-thinker.com/_media/esp8266/esp8266_series_modules_user_manual_v1.1.pdf" H 5900 3300 50  0001 C CNN
+	1    6250 3200
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:R R1
+U 1 1 5F8C9973
+P 6650 2050
+F 0 "R1" H 6720 2096 50  0000 L CNN
+F 1 "R" H 6720 2005 50  0000 L CNN
+F 2 "Resistor_SMD:R_1206_3216Metric" V 6580 2050 50  0001 C CNN
+F 3 "~" H 6650 2050 50  0001 C CNN
+	1    6650 2050
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R2
+U 1 1 5F8C9E82
+P 6850 1600
+F 0 "R2" H 6920 1646 50  0000 L CNN
+F 1 "R" H 6920 1555 50  0000 L CNN
+F 2 "Resistor_SMD:R_1206_3216Metric" V 6780 1600 50  0001 C CNN
+F 3 "~" H 6850 1600 50  0001 C CNN
+	1    6850 1600
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+3.3V #PWR0101
+U 1 1 5F8CA60A
+P 6300 1300
+F 0 "#PWR0101" H 6300 1150 50  0001 C CNN
+F 1 "+3.3V" V 6315 1428 50  0000 L CNN
+F 2 "" H 6300 1300 50  0001 C CNN
+F 3 "" H 6300 1300 50  0001 C CNN
+	1    6300 1300
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	6300 1300 6650 1300
+Wire Wire Line
+	6850 1300 6850 1450
+Wire Wire Line
+	6650 1900 6650 1300
+Connection ~ 6650 1300
+Wire Wire Line
+	6650 1300 6850 1300
+Wire Wire Line
+	6650 2200 6650 2600
+Wire Wire Line
+	6850 1750 6850 2450
+$Comp
+L power:GND #PWR0102
+U 1 1 5F8CBE08
+P 7400 1300
+F 0 "#PWR0102" H 7400 1050 50  0001 C CNN
+F 1 "GND" V 7405 1172 50  0000 R CNN
+F 2 "" H 7400 1300 50  0001 C CNN
+F 3 "" H 7400 1300 50  0001 C CNN
+	1    7400 1300
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:C C1
+U 1 1 5F8CC49D
+P 7100 1300
+F 0 "C1" V 6848 1300 50  0000 C CNN
+F 1 "C" V 6939 1300 50  0000 C CNN
+F 2 "Capacitor_SMD:C_1206_3216Metric" H 7138 1150 50  0001 C CNN
+F 3 "~" H 7100 1300 50  0001 C CNN
+	1    7100 1300
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	6950 1300 6850 1300
+Connection ~ 6850 1300
+$Comp
+L Connector_Generic:Conn_01x07 J1
+U 1 1 5F8CDB02
+P 6150 4450
+F 0 "J1" V 6150 3950 50  0000 L CNN
+F 1 "Conn_01x07" V 6300 4150 50  0000 L CNN
+F 2 "MyKiCad:Tuya_TYWE2L_Edge" H 6150 4450 50  0001 C CNN
+F 3 "~" H 6150 4450 50  0001 C CNN
+	1    6150 4450
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	6450 3800 6450 4250
+Wire Wire Line
+	6350 3800 6350 4250
+Wire Wire Line
+	6250 3800 6250 4250
+Wire Wire Line
+	6150 3800 6150 4250
+Wire Wire Line
+	6050 3800 6050 4250
+$Comp
+L power:GND #PWR0103
+U 1 1 5F8D1FF4
+P 5650 3950
+F 0 "#PWR0103" H 5650 3700 50  0001 C CNN
+F 1 "GND" V 5655 3822 50  0000 R CNN
+F 2 "" H 5650 3950 50  0001 C CNN
+F 3 "" H 5650 3950 50  0001 C CNN
+	1    5650 3950
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	5650 3950 5700 3950
+Wire Wire Line
+	5950 3950 5950 4250
+$Comp
+L power:+3.3V #PWR0104
+U 1 1 5F8D271D
+P 5650 4150
+F 0 "#PWR0104" H 5650 4000 50  0001 C CNN
+F 1 "+3.3V" V 5665 4278 50  0000 L CNN
+F 2 "" H 5650 4150 50  0001 C CNN
+F 3 "" H 5650 4150 50  0001 C CNN
+	1    5650 4150
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	5650 4150 5850 4150
+Wire Wire Line
+	5850 4150 5850 4250
+$Comp
+L power:+3.3V #PWR0105
+U 1 1 5F8D2F00
+P 7550 4000
+F 0 "#PWR0105" H 7550 3850 50  0001 C CNN
+F 1 "+3.3V" V 7565 4128 50  0000 L CNN
+F 2 "" H 7550 4000 50  0001 C CNN
+F 3 "" H 7550 4000 50  0001 C CNN
+	1    7550 4000
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:R R3
+U 1 1 5F8D34C1
+P 7250 4000
+F 0 "R3" V 7043 4000 50  0000 C CNN
+F 1 "R" V 7134 4000 50  0000 C CNN
+F 2 "Resistor_SMD:R_1206_3216Metric" V 7180 4000 50  0001 C CNN
+F 3 "~" H 7250 4000 50  0001 C CNN
+	1    7250 4000
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	7400 4000 7500 4000
+Wire Wire Line
+	7100 4000 6850 4000
+Wire Wire Line
+	6850 4000 6850 3800
+Wire Wire Line
+	7350 2450 6850 2450
+Connection ~ 6850 2450
+Wire Wire Line
+	6850 2450 6850 2600
+Wire Wire Line
+	7200 4350 6850 4350
+Wire Wire Line
+	6850 4350 6850 4000
+Connection ~ 6850 4000
+$Comp
+L Connector_Generic:Conn_01x02 J2
+U 1 1 5F8D7A96
+P 6750 4800
+F 0 "J2" V 6622 4880 50  0000 L CNN
+F 1 "Conn_01x02" V 6713 4880 50  0000 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 6750 4800 50  0001 C CNN
+F 3 "~" H 6750 4800 50  0001 C CNN
+	1    6750 4800
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	6750 3800 6750 4600
+Wire Wire Line
+	6550 3800 6550 4100
+Wire Wire Line
+	6550 4100 6650 4100
+Wire Wire Line
+	6650 4100 6650 4600
+Wire Wire Line
+	7050 3200 7500 3200
+Wire Wire Line
+	7500 3200 7500 4000
+Connection ~ 7500 4000
+Wire Wire Line
+	7500 4000 7550 4000
+Wire Wire Line
+	5550 3200 5350 3200
+Wire Wire Line
+	5350 3200 5350 3800
+Wire Wire Line
+	5350 3800 5700 3800
+Wire Wire Line
+	5700 3800 5700 3950
+Connection ~ 5700 3950
+Wire Wire Line
+	5700 3950 5950 3950
+Wire Wire Line
+	7250 1300 7400 1300
+$Comp
+L Connector_Generic:Conn_01x01 J3
+U 1 1 5F8EB6B6
+P 7400 4350
+F 0 "J3" H 7480 4392 50  0000 L CNN
+F 1 "Conn_01x01" H 7480 4301 50  0000 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical" H 7400 4350 50  0001 C CNN
+F 3 "~" H 7400 4350 50  0001 C CNN
+	1    7400 4350
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector_Generic:Conn_01x01 J4
+U 1 1 5F8EBB78
+P 7550 2450
+F 0 "J4" H 7630 2492 50  0000 L CNN
+F 1 "Conn_01x01" H 7630 2401 50  0000 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical" H 7550 2450 50  0001 C CNN
+F 3 "~" H 7550 2450 50  0001 C CNN
+	1    7550 2450
+	1    0    0    -1  
+$EndComp
+$EndSCHEMATC
